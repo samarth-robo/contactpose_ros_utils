@@ -1,19 +1,71 @@
 <launch>
-  <arg name="view" default="true"/>
+  <arg name="date"/>
   <arg name="kinect_res" default="qhd"/>
+  <arg name="left" default="true"/>
+  <arg name="right" default="true"/>
+  <arg name="middle" default="true"/>
+  <arg name="max_depth" default="3.0"/>
+  <arg name="view" default="true"/>
+  <arg name="view_images_only" default="false"/>
 
-  <include file="$(find kinect2_bridge)/launch/kinect2_bridge.launch">
+  <!-- All the static transforms -->
+  <node name="tf_pub" pkg="contactdb_utils" type="tf_publisher.py"
+        args="--date $(arg date)" output="screen" required="true"/>
+
+  <!-- left -->
+  <group if="$(arg left)">
+    <include file="$(find kinect2_bridge)/launch/kinect2_bridge.launch">
+    <arg name="sensor" value="022402465047"/>
     <arg name="output" value="log"/>
+    <arg name="base_name" value="kinect2_left"/>
     <arg name="publish_tf" value="true"/>
-    <arg name="max_depth" value="1.50"/>
-    <arg name="calib_path" value="$(find contactdb_utils)/calibrations"/>
-  </include>
-
-  <group if="$(arg view)">
-    <node name="kinect_viewer" pkg="image_view" type="image_view"
-          ns="kinect2/$(arg kinect_res)" output="screen">
-      <remap from="image" to="image_color_rect"/>
+    <arg name="max_depth" value="$(arg max_depth)"/>
+    <arg name="calib_path"
+         value="$(find contactdb_utils)/calibrations/kinects/$(arg date)"/>
+    </include>
+    <node name="left_view" type="image_view" pkg="image_view"
+          if="$(arg view_images_only)">
+      <remap from="image" to="kinect2_left/$(arg kinect_res)/image_color_rect"/>
+    </node>
+  </group>
+  <!-- right -->
+  <group if="$(arg right)">
+    <include file="$(find kinect2_bridge)/launch/kinect2_bridge.launch"
+             if="$(arg right)">
+      <arg name="sensor" value="001329665147"/>
+      <arg name="output" value="log"/>
+      <arg name="base_name" value="kinect2_right"/>
+      <arg name="publish_tf" value="true"/>
+      <arg name="max_depth" value="$(arg max_depth)"/>
+      <arg name="calib_path"
+           value="$(find contactdb_utils)/calibrations/kinects/$(arg date)"/>
+    </include>
+    <node name="right_view" type="image_view" pkg="image_view"
+          if="$(arg view_images_only)">
+      <remap from="image" to="kinect2_right/$(arg kinect_res)/image_color_rect"/>
+    </node>
+  </group>
+  <!-- middle -->
+  <group if="$(arg middle)">
+    <include file="$(find kinect2_bridge)/launch/kinect2_bridge.launch"
+             if="$(arg middle)">
+      <arg name="sensor" value="004279661647"/>
+      <arg name="output" value="log"/>
+      <arg name="base_name" value="kinect2_middle"/>
+      <arg name="publish_tf" value="true"/>
+      <arg name="max_depth" value="$(arg max_depth)"/>
+      <arg name="calib_path"
+           value="$(find contactdb_utils)/calibrations/kinects/$(arg date)"/>
+    </include>
+    <node name="middle_view" type="image_view" pkg="image_view"
+          if="$(arg view_images_only)">
+      <remap from="image" to="kinect2_middle/$(arg kinect_res)/image_color_rect"/>
     </node>
   </group>
 
+  <group if="$(arg view)">
+    <node name="rviz" pkg="rviz" type="rviz" unless="$(arg view_images_only)"
+          args="-d $(find contactdb_utils)/rviz_files/kinects.rviz"
+          output="screen" required="true"/>
+  </group>
 </launch>

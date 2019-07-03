@@ -264,8 +264,8 @@ class PoseGenerator(object):
     ps_gt = np.vstack((ps_gt, c_gt))
     ps_pred = np.vstack((ps_pred, c_pred))
 
-    print 'Pred center = ', c_pred
-    print 'GT center = ', c_gt
+    print('Pred center = ', c_pred)
+    print('GT center = ', c_gt)
 
     ps_gt = np.vstack((ps_gt.T, np.ones(len(ps_gt))))
     ps_gt = np.dot(t.inverse_matrix(T_c_ttb), ps_gt)

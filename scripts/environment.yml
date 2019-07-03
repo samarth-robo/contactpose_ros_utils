@@ -1,0 +1,15 @@
+name: contactdb_v2
+
+channels:
+  - conda-forge
+
+dependencies:
+  - python=3.5
+  - numpy
+  - scipy
+  - ipython
+  - nose
+  - pyyaml
+  - opencv
+  - pip:
+    - transforms3d
