@@ -183,6 +183,8 @@ def convert(input_dir):
       np.savetxt(filename, T)
       print('{:s} written.'.format(filename))
 
+  # TODO: output YAML files
+
 
 if __name__ == '__main__':
   parser = argparse.ArgumentParser()

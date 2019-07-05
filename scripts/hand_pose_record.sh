@@ -10,9 +10,7 @@ node_name=$3
 
 rosbag record --output-prefix $1 -b 0 \
 /tf /tf_static \
-/deepgrasp/kinect2/${kinect_res}/camera_info \
-/deepgrasp/kinect2/${kinect_res}/image_color_rect/compressed \
-/deepgrasp/kinect2/${kinect_res}/image_depth_rect/compressed \
+-e "/deepgrasp/kinect2_(left|right|middle)/${kinect_res}/(camera_info|image_color_rect/compressed|image_depth_rect/compressed)" \
 __name:=${node_name}
 
 # debug

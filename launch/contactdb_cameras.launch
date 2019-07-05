@@ -1,15 +1,18 @@
 <launch>
+  <arg name="date"/>
   <arg name="view" default="true"/>
   <arg name="kinect_res" default="qhd"/>
   <arg name="kinect" default="true"/>
   <arg name="thermal" default="true"/>
-  <arg name="thermal_const_norm" default="false"/>
+  <arg name="thermal_const_norm" default="true"/>
 
   <!-- Start Kinect -->
   <include file="$(find contactdb_utils)/launch/kinect.launch" ns="deepgrasp"
            if="$(arg kinect)">
-    <arg name="view" value="$(arg view)"/>
+    <arg name="view" value="false"/>
+    <arg name="view_images_only" value="$(arg view)"/>
     <arg name="kinect_res" value="$(arg kinect_res)"/>
+    <arg name="date" value="$(arg date)"/>
   </include>
 
   <!-- Start thermal camera -->

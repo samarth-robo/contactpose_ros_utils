@@ -1,0 +1,14 @@
+#
+# Definition of all trackable objects
+# Identifier corresponds to Trackable ID set in Tracking Tools
+#
+rigid_bodies:
+    '5':
+        pose: toothbrush/pose
+        pose2d: toothbrush/ground_pose
+        child_frame_id: toothbrush_frame
+        parent_frame_id: optitrack_frame
+optitrack_config:
+        multicast_address: 239.255.42.99
+        command_port: 1510
+        data_port: 1511

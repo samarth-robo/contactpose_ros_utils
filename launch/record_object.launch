@@ -1,28 +1,30 @@
 <launch>
-    <arg name="serial_port" default="/dev/ttyACM0"/>
-    <arg name="marker_id" default="0"/>
+    <arg name="serial_port" default="/dev/ttyUSB0"/>
     <arg name="kinect_res" default="qhd"/>
-    <arg name="no_recording" default="false"/>
     <arg name="p_id"/>
+    <arg name="date"/>
 
-    <include file="$(find contactdb_utils)/launch/ar_tag.launch">
-        <arg name="print" value="false"/>
-        <arg name="rviz" value="false"/>
-        <arg name="image_view" value="true"/>
+    <include file="$(find contactdb_utils)/launch/contactdb_cameras.launch">
         <arg name="kinect_res" value="$(arg kinect_res)"/>
+        <arg name="thermal" value="false"/>
+        <arg name="date" value="$(arg date)"/>
+    </include>
+
+    <include file="$(find mocap_optitrack)/launch/mocap.launch">
+        <arg name="mocap_config_file"
+             value="$(find contactdb_utils)/data/mocap.yaml"/>
     </include>
 
     <node name="turntable_operator" pkg="contactdb_utils" cwd="node"
           type="operate_turntable.py" output="screen" required="true"
           args="
           --serial_port $(arg serial_port)
-          --marker_id $(arg marker_id)
           --data_dir $(find contactdb_utils)/data/contactdb_data/rosbags/$(arg p_id)
           --kinect_res $(arg kinect_res)"/>
 
-    <!--node name="rviz" pkg="rviz" type="rviz"
+    <node name="rviz" pkg="rviz" type="rviz"
           args="-d $(find contactdb_utils)/rviz_files/recording.rviz"
           output="screen"
-          required="true"/-->
+          required="true"/>
 
 </launch>

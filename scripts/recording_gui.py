@@ -1,6 +1,6 @@
 import sys
-from PyQt4.QtCore import pyqtSlot
-from PyQt4.QtGui import *
+from PyQt5.QtCore import pyqtSlot
+from PyQt5.QtWidgets import *
 from functools import partial
 import time
 

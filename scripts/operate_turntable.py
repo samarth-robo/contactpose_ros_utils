@@ -10,15 +10,12 @@ import rospy
 from geometry_msgs.msg import TransformStamped
 import argparse
 from tf import transformations as tx
-from tf import TransformListener
 import tf2_ros
 import numpy as np
-from ar_track_alvar_msgs.msg import AlvarMarkers
 import sys
-import cv2
 import subprocess
 import os
-from PyQt4.QtGui import QApplication
+from PyQt5.QtWidgets import QApplication
 
 from recording_gui import RecordingGUI
 
@@ -79,30 +76,22 @@ class RosbagRecord:
 
 
 class TurnTableOperator(object):
-  def __init__(self, serial_port, marker_id, contactdb_recorder, hand_pose_recorder,
-      step=3, motor_speed=150, motor_acceleration=200, marker_stable_thresh=30):
+  def __init__(self, serial_port, contactdb_recorder, hand_pose_recorder,
+      step=3, motor_speed=150, motor_acceleration=200):
     """"
     :param serial_port:
-    :param marker_id:
     :param {contactdb,hand_pose}_recorder: Object of the RosbagRecord class
     :param step:
     :param motor_speed:
     :param motor_acceleration:
-    :param marker_stable_thresh: no. of times marker needs to be seen
-    continuously
     """
     self.step = step
-    self.marker_id = marker_id
     self.contactdb_recorder = contactdb_recorder
     self.hand_pose_recorder = hand_pose_recorder
-    self.tt_base_t = []
-    self.tt_base_pose = TransformStamped()
-    self.tf_listener = TransformListener()
-    self.marker_seen_count = 0
-    self.marker_stable_thresh = marker_stable_thresh
-    self.marker_pose_ready = False
-    self.tt_angle_bcaster = tf2_ros.TransformBroadcaster()
-    self.tt_center_bcaster = tf2_ros.TransformBroadcaster()
+    self.tt_base_pose = TransformStamped()  # TODO: fill by reading
+    self.tt_base_pose.header.frame_id = 'optitrack_frame'
+    self.tt_base_pose.child_frame_id = 'turntable_base'
+    self.tt_bcaster = tf2_ros.TransformBroadcaster()
 
     # logging for the Arduino driver
     ch = logging.StreamHandler()
@@ -124,26 +113,7 @@ class TurnTableOperator(object):
     self.arduino.motor_reset_origin()
     self.arduino.motor_speed(motor_speed)
     self.arduino.motor_acceleration(motor_acceleration)
-
-    # OpenCV window for clicking
-    self.im_size = 50
-    self.button_win_name = 'Marker Ready'
-    self.button_im = self._make_im([0, 0, 255])
-    cv2.imshow(self.button_win_name, self.button_im)
-    cv2.waitKey(1)
-
     rospy.sleep(0.5)
-    assert self.tf_listener.frameExists('turntable_base_tmp')
-    assert self.tf_listener.frameExists('boson_frame')
-
-  def _make_im(self, pixel):
-    """
-    :param pixel: (3, )
-    :return:
-    """
-    im = np.asarray(pixel, dtype=np.uint8)[np.newaxis, np.newaxis, :]
-    im = np.repeat(np.repeat(im, self.im_size, axis=0), self.im_size, axis=1)
-    return im
 
   def publish_tfs(self, tt_angle):
     t = TransformStamped()  # pose of turntable_frame w.r.t. turntable_base
@@ -158,16 +128,7 @@ class TurnTableOperator(object):
     t.transform.rotation.y = q[1]
     t.transform.rotation.z = q[2]
     t.transform.rotation.w = q[3]
-    self.tt_angle_bcaster.sendTransform(t)
-
-    t.header.frame_id = 'kinect2_rgb_optical_frame'
-    t.child_frame_id = 'turntable_base'
-    tm = np.mean(self.tt_base_t, axis=0)
-    t.transform.translation.x = tm[0]
-    t.transform.translation.y = tm[1]
-    t.transform.translation.z = tm[2]
-    t.transform.rotation = self.tt_base_pose.transform.rotation
-    self.tt_center_bcaster.sendTransform(t)
+    self.tt_bcaster.sendTransform([t, self.tt_base_pose])
 
   def record_hand_pose(self, object_name):
     self.hand_pose_recorder.start_recording(object_name)
@@ -175,6 +136,7 @@ class TurnTableOperator(object):
   def run_turntable(self, object_name):
     # first stop the hand pose recorder node if it is active
     self.hand_pose_recorder.stop_recording_handler()
+    return
     # start recording for contactdb
     angle = 0
     self.contactdb_recorder.start_recording(object_name)
@@ -186,7 +148,6 @@ class TurnTableOperator(object):
       self.arduino.motor_move(self.step)
       angle += self.step
       rospy.sleep(0.5)
-      cv2.waitKey(1)
     self.contactdb_recorder.stop_recording_handler()
 
   def disconnect(self):
@@ -195,52 +156,11 @@ class TurnTableOperator(object):
     self.contactdb_recorder.stop_recording_handler()
     self.hand_pose_recorder.stop_recording_handler()
 
-  def ar_tag_callback(self, markers):
-    cv2.imshow(self.button_win_name, self.button_im)
-    cv2.waitKey(1)
-
-    if self.marker_pose_ready:
-      return
-
-    for m in markers.markers:
-      if m.id != self.marker_id:
-        continue
-      if self.marker_seen_count > self.marker_stable_thresh:
-        self.button_im = self._make_im([0, 255, 0])
-        self.marker_pose_ready = True
-        self.marker_seen_count = self.marker_stable_thresh
-      else:
-        self.button_im = self._make_im([0, 0, 255])
-        pos, rotquat = self.tf_listener.lookupTransform(
-          'kinect2_rgb_optical_frame', 'turntable_base_tmp', rospy.Time(0))
-        if np.isnan(pos).any() or np.isnan(rotquat).any():
-          rospy.logwarn('NaN pose')
-          break
-        self.marker_seen_count += 1
-        self.tt_base_t.append(pos)
-        self.tt_base_pose.transform.rotation.x = rotquat[0]
-        self.tt_base_pose.transform.rotation.y = rotquat[1]
-        self.tt_base_pose.transform.rotation.z = rotquat[2]
-        self.tt_base_pose.transform.rotation.w = rotquat[3]
-        rospy.loginfo('Marker {:d} seen {:d} times'.
-                      format(self.marker_id, self.marker_seen_count))
-        rospy.loginfo('Current pose of TT base w.r.t. Kinect ='
-                      '[{:4.3f}, {:4.3f}, {:4.3f}]'.
-                      format(self.tt_base_pose.transform.translation.x,
-                             self.tt_base_pose.transform.translation.y,
-                             self.tt_base_pose.transform.translation.z))
-      break
-    else:
-      rospy.logwarn('Marker {:d} not seen, resetting counter'.
-                    format(self.marker_id))
-      # self.marker_seen_count = 0
 
 if __name__ == '__main__':
   parser = argparse.ArgumentParser()
   parser.add_argument('--serial_port', type=str, default='/dev/ttyACM0',
                       help='Serial port of the Arduino')
-  parser.add_argument('--marker_id', type=int, default=0,
-                      help='ID of the marker')
   parser.add_argument('--data_dir', type=str,
                       default=osp.join('..', 'data', 'contactdb_data'))
   parser.add_argument('--kinect_res', type=str, default='qhd')
@@ -255,16 +175,10 @@ if __name__ == '__main__':
       hand_pose=True)
   tt = TurnTableOperator(contactdb_recorder=contactdb_recorder,
       hand_pose_recorder=hand_pose_recorder, serial_port=args.serial_port,
-      marker_id=int(args.marker_id), step=40)
+      step=40)
   rospy.on_shutdown(tt.disconnect)
-  rospy.Subscriber('deepgrasp/ar_pose_marker', AlvarMarkers,
-                   tt.ar_tag_callback)
 
   def record_cb(object_name, hand_pose=False):
-    if not tt.marker_pose_ready:
-      rospy.logwarn('Marker pose not captured, not recording')
-      return
-
     if hand_pose:
       tt.record_hand_pose(object_name)
     else:
