@@ -1,0 +1,9 @@
+<launch>
+    <include file="$(find mocap_optitrack)/launch/mocap.launch">
+        <arg name="mocap_config_file"
+             value="$(find contactdb_utils)/data/mocap.yaml"/>
+    </include>
+
+    <node name="rviz" type="rviz" pkg="rviz" output="screen" required="true"
+          args="-d $(find contactdb_utils)/rviz_files/check_optitrack_streaming.rviz"/>
+</launch>

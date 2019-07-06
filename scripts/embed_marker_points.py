@@ -1,16 +1,18 @@
 import pymesh 
-import open3d
+import open3d as o3d
 import os 
 import argparse
 import numpy as np
 from copy import deepcopy
 import transforms3d as xforms
+from lxml import etree
+from scripts.global_pointcloud_registration import register
 from IPython.core.debugger import set_trace
 
 osp = os.path
-o3dg = open3d.geometry
-o3du = open3d.utility
-o3dv = open3d.visualization
+o3dg = o3d.geometry
+o3du = o3d.utility
+o3dv = o3d.visualization
 
 
 def rotmat_from_vecs(v1, v2=np.asarray([0, 0, 1])):
@@ -103,6 +105,46 @@ def create_intruder(marker_diameter_mm):
   return cyl
 
 
+def align_optitrack_rigid_body(object_name, picked_points_dir,
+    rigid_bodies_dir=osp.join('..', 'data', 'contactdb_data',
+                              'optitrack_rigid_bodies')):
+  # read Optitrack rigid body
+  filename = osp.join(rigid_bodies_dir, '{:s}.motive'.format(object_name))
+  data = etree.parse(filename).getroot()
+  data = data[0][0]
+  o_pts = []
+  o_ids = []
+  for markers in data:
+    if markers.tag != 'markers':
+      continue
+    for marker in markers:
+      for child in marker:
+        if child.tag == 'position':
+          p = child.text.split(',')
+          o_pts.append([float(p[0]), float(p[1]), float(p[2])])
+        elif child.tag == 'label_id':
+          o_ids.append(int(child.text))
+  o_pc = o3dg.PointCloud()
+  o_pc.points = o3du.Vector3dVector(np.asarray(o_pts) * 1000)
+
+  # read picked points
+  filename = osp.join(picked_points_dir,
+                      '{:s}_marker_locations.txt'.format(object_name))
+  d = np.loadtxt(filename, delimiter=',')
+  p_pts = d[:, :3]
+  p_pc = o3dg.PointCloud()
+  p_pc.points = o3du.Vector3dVector(np.asarray(p_pts))
+
+  assert len(o_pc.points) == len(p_pc.points)
+  T = register(p_pc, o_pc)
+  # convert to meters
+  T[:3, 3] /= 1000.0
+  filename = osp.join(rigid_bodies_dir,
+                      'optitrack_{:s}_alignment.txt'.format(object_name))
+  np.savetxt(filename, T)
+  print('{:s} written.'.format(filename))
+
+
 def embed(input_filename, output_dir, marker_diameter_mm, recut):
   input_filename = osp.expanduser(input_filename)
   object_name, ext = input_filename.split('/')[-1].split('.')
@@ -162,7 +204,7 @@ def embed(input_filename, output_dir, marker_diameter_mm, recut):
 
   output_filename = osp.join(output_dir,
       '{:s}.{:s}'.format(object_name, ext))
-  open3d.io.write_triangle_mesh(output_filename, output_mesh_o3d)
+  o3d.io.write_triangle_mesh(output_filename, output_mesh_o3d)
 
 
 if __name__ == '__main__':
@@ -173,4 +215,6 @@ if __name__ == '__main__':
       help="Diameter of marker as ordered")
   parser.add_argument('--recut', action='store_true')
   args = parser.parse_args()
-  embed(args.input_filename, args.output_dir, args.marker_diameter_mm, args.recut)
+  # embed(args.input_filename, args.output_dir, args.marker_diameter_mm, args.recut)
+  object_name, ext = args.input_filename.split('/')[-1].split('.')
+  align_optitrack_rigid_body(object_name, args.output_dir)

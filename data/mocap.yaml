@@ -6,7 +6,12 @@ rigid_bodies:
     '5':
         pose: toothbrush/pose
         pose2d: toothbrush/ground_pose
-        child_frame_id: toothbrush_frame
+        child_frame_id: toothbrush_frame_optitrack
+        parent_frame_id: optitrack_frame
+    '6':
+        pose: camera/pose
+        pose2d: camera/ground_pose
+        child_frame_id: camera_frame_optitrack
         parent_frame_id: optitrack_frame
 optitrack_config:
         multicast_address: 239.255.42.99
