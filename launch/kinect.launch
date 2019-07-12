@@ -5,8 +5,8 @@
   <arg name="right" default="true"/>
   <arg name="middle" default="true"/>
   <arg name="max_depth" default="3.0"/>
-  <arg name="view" default="true"/>
-  <arg name="view_images_only" default="false"/>
+  <arg name="view" default="false"/>
+  <arg name="view_images_only" default="true"/>
 
   <!-- All the static transforms -->
   <node name="tf_pub" pkg="contactdb_utils" type="tf_publisher.py"
@@ -21,7 +21,7 @@
     <arg name="publish_tf" value="true"/>
     <arg name="max_depth" value="$(arg max_depth)"/>
     <arg name="calib_path"
-         value="$(find contactdb_utils)/calibrations/kinects/$(arg date)"/>
+         value="$(find contactdb_utils)/calibrations/intrinsics/kinects"/>
     </include>
     <node name="left_view" type="image_view" pkg="image_view"
           if="$(arg view_images_only)">
@@ -38,7 +38,7 @@
       <arg name="publish_tf" value="true"/>
       <arg name="max_depth" value="$(arg max_depth)"/>
       <arg name="calib_path"
-           value="$(find contactdb_utils)/calibrations/kinects/$(arg date)"/>
+           value="$(find contactdb_utils)/calibrations/intrinsics/kinects"/>
     </include>
     <node name="right_view" type="image_view" pkg="image_view"
           if="$(arg view_images_only)">
@@ -55,7 +55,7 @@
       <arg name="publish_tf" value="true"/>
       <arg name="max_depth" value="$(arg max_depth)"/>
       <arg name="calib_path"
-           value="$(find contactdb_utils)/calibrations/kinects/$(arg date)"/>
+           value="$(find contactdb_utils)/calibrations/intrinsics/kinects"/>
     </include>
     <node name="middle_view" type="image_view" pkg="image_view"
           if="$(arg view_images_only)">
