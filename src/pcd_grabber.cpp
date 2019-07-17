@@ -15,7 +15,7 @@ using namespace std;
 using namespace ros;
 
 class PCDGrabber {
-  typedef PointXYZI PointT;
+  typedef PointXYZRGB PointT;
   typedef PointCloud<PointT> PointCloudT;
   PointCloudT::Ptr cloud;
   cv_bridge::CvImageConstPtr image;

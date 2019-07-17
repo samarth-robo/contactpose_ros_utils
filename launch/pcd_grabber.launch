@@ -1,0 +1,17 @@
+<launch>
+    <arg name="calib_date"/>
+
+    <include file="$(find contactdb_utils)/launch/kinect.launch">
+        <arg name="date" value="$(arg calib_date)"/>
+        <arg name="left" value="false"/>
+        <arg name="right" value="true"/>
+        <arg name="middle" value="false"/>
+    </include>
+
+    <node name="pcd_grabber" type="pcd_grabber" pkg="contactdb_utils"
+          output="screen" required="true" args="$(env HOME)/contactdb_data/test camera">
+        <remap from="points" to="kinect2_right/qhd/points"/>
+        <remap from="image" to="kinect2_right/qhd/image_color_rect"/>
+    </node>
+
+</launch>

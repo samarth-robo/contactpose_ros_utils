@@ -41,7 +41,6 @@ def align_optitrack_rigid_body(object_name, picked_points_dir,
   p_pc = o3dg.PointCloud()
   p_pc.points = o3du.Vector3dVector(np.asarray(p_pts))
 
-  assert len(o_pc.points) == len(p_pc.points)
   T = register(p_pc, o_pc)
   # convert to meters
   T[:3, 3] /= 1000.0

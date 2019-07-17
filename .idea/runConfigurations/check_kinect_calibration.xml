@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="align_optitrack_rigid_body" type="PythonConfigurationType" factoryName="Python">
+  <configuration default="false" name="check_kinect_calibration" type="PythonConfigurationType" factoryName="Python">
     <module name="contactdb_utils_v2" />
     <option name="INTERPRETER_OPTIONS" value="" />
     <option name="PARENT_ENVS" value="true" />
@@ -12,8 +12,8 @@
     <option name="ADD_CONTENT_ROOTS" value="true" />
     <option name="ADD_SOURCE_ROOTS" value="true" />
     <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-    <option name="SCRIPT_NAME" value="$PROJECT_DIR$/scripts/align_optitrack_rigid_body.py" />
-    <option name="PARAMETERS" value="--pick $USER_HOME$/dropbox/contactdb_v2/data/stl_files_notched --object airplane" />
+    <option name="SCRIPT_NAME" value="$PROJECT_DIR$/scripts/check_kinect_calibration.py" />
+    <option name="PARAMETERS" value="" />
     <option name="SHOW_COMMAND_LINE" value="false" />
     <option name="EMULATE_TERMINAL" value="false" />
     <option name="MODULE_MODE" value="false" />

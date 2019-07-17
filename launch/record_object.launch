@@ -3,6 +3,7 @@
     <arg name="kinect_res" default="qhd"/>
     <arg name="p_id"/>
     <arg name="date"/>
+    <arg name="vis" default="false"/>
 
     <include file="$(find contactdb_utils)/launch/contactdb_cameras.launch">
         <arg name="kinect_res" value="$(arg kinect_res)"/>
@@ -22,7 +23,7 @@
           --data_dir $(find contactdb_utils)/data/contactdb_data/rosbags/$(arg p_id)
           --kinect_res $(arg kinect_res)"/>
 
-    <node name="rviz" pkg="rviz" type="rviz"
+    <node name="rviz" pkg="rviz" type="rviz" if="$(arg vis)"
           args="-d $(find contactdb_utils)/rviz_files/recording.rviz"
           output="screen"
           required="true"/>
