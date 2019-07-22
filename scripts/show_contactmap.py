@@ -28,6 +28,13 @@ def texture_proc(colors, a=0.05, invert=False):
   return colors
 
 
+def apply_colormap(mesh, sigmoid_a=0.05, invert=False):
+  colors = np.asarray(mesh.vertex_colors)[:, 0]
+  colors = texture_proc(colors, a=sigmoid_a, invert=invert)
+  mesh.vertex_colors = open3d.Vector3dVector(colors)
+  return mesh
+
+
 def show_object_mesh(base_dir, filename_suffix='', sigmoid_a=0.05,
     output_filename='test.png'):
   object_name_filename = osp.join(base_dir, 'object_name.txt')
@@ -42,9 +49,7 @@ def show_object_mesh(base_dir, filename_suffix='', sigmoid_a=0.05,
   m.compute_triangle_normals()
 
   # apply colormap
-  colors = np.asarray(m.vertex_colors)[:, 0]
-  colors = texture_proc(colors, a=sigmoid_a, invert=('full14' in mesh_filename))
-  m.vertex_colors = open3d.Vector3dVector(colors)
+  m = apply_colormap(m, sigmoid_a, invert=('full14' in mesh_filename))
 
   show_object_mesh.im_count = 0
   show_object_mesh.output_filename_template = '{:s}_{:s}.png'.\

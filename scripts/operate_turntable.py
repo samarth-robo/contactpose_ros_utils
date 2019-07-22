@@ -8,6 +8,7 @@ import logging
 from horus.engine.driver import board
 import rospy
 from geometry_msgs.msg import TransformStamped
+from std_msgs.msg import String
 import argparse
 from tf import transformations as tx
 import tf2_ros
@@ -91,7 +92,12 @@ class TurnTableOperator(object):
     self.tt_base_pose = TransformStamped()  # TODO: fill by reading
     self.tt_base_pose.header.frame_id = 'optitrack_frame'
     self.tt_base_pose.child_frame_id = 'turntable_base'
+    self.tt_base_pose.transform.rotation.w = 1
     self.tt_bcaster = tf2_ros.TransformBroadcaster()
+    self.tf_buffer = tf2_ros.Buffer()
+    self.tf_listener = tf2_ros.TransformListener(self.tf_buffer)
+    self.boson_ffc_pub = rospy.Publisher('/flir/command/thermal/runffc', String,
+                                         queue_size=1)
 
     # logging for the Arduino driver
     ch = logging.StreamHandler()
@@ -136,7 +142,8 @@ class TurnTableOperator(object):
   def run_turntable(self, object_name):
     # first stop the hand pose recorder node if it is active
     self.hand_pose_recorder.stop_recording_handler()
-    return
+    # perform Boson FFC
+    self.boson_ffc_pub.publish("00000001")
     # start recording for contactdb
     angle = 0
     self.contactdb_recorder.start_recording(object_name)
@@ -156,10 +163,22 @@ class TurnTableOperator(object):
     self.contactdb_recorder.stop_recording_handler()
     self.hand_pose_recorder.stop_recording_handler()
 
+  def can_transform(self, object_name):
+    try:
+      self.tf_buffer.lookup_transform('optitrack_frame',
+                                      '{:s}_frame_optitrack'.format(object_name),
+                                      rospy.Time.now(), rospy.Duration(5))
+      return True
+    except (tf2_ros.LookupException, tf2_ros.ConnectivityException,
+    tf2_ros.ExtrapolationException) as e:
+      rospy.logwarn('Could not lookup the transform for {:s}: {:s}. Is Optitrack '
+                    'running and streaming?'.format(object_name, e))
+      return False
+
 
 if __name__ == '__main__':
   parser = argparse.ArgumentParser()
-  parser.add_argument('--serial_port', type=str, default='/dev/ttyACM0',
+  parser.add_argument('--serial_port', type=str, default='/dev/ttyUSB0',
                       help='Serial port of the Arduino')
   parser.add_argument('--data_dir', type=str,
                       default=osp.join('..', 'data', 'contactdb_data'))
@@ -179,6 +198,8 @@ if __name__ == '__main__':
   rospy.on_shutdown(tt.disconnect)
 
   def record_cb(object_name, hand_pose=False):
+    if not tt.can_transform(object_name):
+      return
     if hand_pose:
       tt.record_hand_pose(object_name)
     else:

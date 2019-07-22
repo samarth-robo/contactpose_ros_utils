@@ -3,7 +3,6 @@ import os
 import logging
 import argparse
 import dataset_utils
-from IPython.core.debugger import set_trace
 osp = os.path
 
 

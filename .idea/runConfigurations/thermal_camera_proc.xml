@@ -1,0 +1,7 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="thermal_camera_proc" type="CMakeRunConfiguration" factoryName="Application" PROGRAM_PARAMS="agc_border 0.1  cold_temp -1 image_in:=image_raw_raw image_out:=image_raw __ns:=boson " PASS_PARENT_ENVS_2="true" PROJECT_NAME="contactdb_utils" TARGET_NAME="thermal_camera_proc" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="contactdb_utils" RUN_TARGET_NAME="thermal_camera_proc">
+    <method v="2">
+      <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+    </method>
+  </configuration>
+</component>

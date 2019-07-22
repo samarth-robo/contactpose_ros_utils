@@ -2,17 +2,22 @@
   <arg name="date"/>
   <arg name="view" default="true"/>
   <arg name="kinect_res" default="qhd"/>
-  <arg name="kinect" default="true"/>
+  <arg name="kinect_left" default="true"/>
+  <arg name="kinect_right" default="true"/>
+  <arg name="kinect_middle" default="true"/>
   <arg name="thermal" default="true"/>
-  <arg name="thermal_const_norm" default="true"/>
+  <arg name="thermal_const_norm" default="false"/>
 
   <!-- Start Kinect -->
   <include file="$(find contactdb_utils)/launch/kinect.launch" ns="deepgrasp"
-           if="$(arg kinect)">
+           if="$(eval arg('kinect_left') or arg('kinect_right') or arg('kinect_middle'))">
     <arg name="view" value="false"/>
     <arg name="view_images_only" value="$(arg view)"/>
     <arg name="kinect_res" value="$(arg kinect_res)"/>
     <arg name="date" value="$(arg date)"/>
+    <arg name="left" value="$(arg kinect_left)"/>
+    <arg name="right" value="$(arg kinect_right)"/>
+    <arg name="middle" value="$(arg kinect_middle)"/>
   </include>
 
   <!-- Start thermal camera -->

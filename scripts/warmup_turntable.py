@@ -3,7 +3,7 @@ import time
 
 # init and connect the driver
 arduino = board.Board()
-arduino.serial_name = '/dev/ttyACM0'
+arduino.serial_name = '/dev/ttyUSB0'
 try:
   arduino.connect()
 except Exception as e:
@@ -18,7 +18,7 @@ arduino.motor_speed(200)
 arduino.motor_acceleration(200)
 
 step = 40
-N = 50
+N = 5
 
 for i in xrange(N):
   if i % 5 == 0:

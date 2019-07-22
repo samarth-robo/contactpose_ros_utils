@@ -44,12 +44,6 @@ if __name__ == '__main__':
   myargv = rospy.myargv(argv=sys.argv)
   args = parser.parse_args(myargv[1:])
 
-  # with open(osp.join(rospack.get_path(package_name),
-  #   'calibrations/stereo.pkl'), 'r') as f:
-  #   extrinsics = pickle.load(f)
-  # thermal_tform = get_tform(extrinsics['R'], extrinsics['T'],
-  #                           'kinect2_rgb_optical_frame', 'boson_frame')
-
   calib_dir = osp.join(rospack.get_path(package_name), 'calibrations')
   name2serial = {}
   with open(osp.join(calib_dir, 'kinect_serial_numbers.txt'), 'r') as f:
@@ -58,7 +52,7 @@ if __name__ == '__main__':
       name2serial[name] = serial
 
   calib_dir = osp.join(calib_dir, 'extrinsics', args.date)
-  kinect_tforms = []
+  tforms = []
   for kinect_name, serial in name2serial.items():
     k_T_w = np.loadtxt(osp.join(calib_dir,
                                 'kinect_{:s}.txt'.format(kinect_name)))
@@ -67,14 +61,21 @@ if __name__ == '__main__':
 
     tform = get_tform(w_T_k[:3, :3], w_T_k[:3, 3], 'optitrack_frame',
                       'kinect2_{:s}_link'.format(kinect_name))
-    kinect_tforms.append(tform)
+    tforms.append(tform)
+
+  # thermal camera
+  k_T_w = np.loadtxt(osp.join(calib_dir, 'boson.txt'))
+  k_T_w[:3, 3] /= 1000.0
+  w_T_k = np.linalg.inv(k_T_w)
+  tform = get_tform(w_T_k[:3, :3], w_T_k[:3, 3], 'optitrack_frame', 'boson_frame')
+  tforms.append(tform)
 
   # rviz transformation
   rviz_tform = get_tform(tx.euler_matrix(np.pi/2.0, 0, 0)[:3, :3], np.zeros(3),
                          'rviz_frame', 'optitrack_frame')
-  kinect_tforms.append(rviz_tform)
+  tforms.append(rviz_tform)
 
   # send
   broadcaster = tf2_ros.StaticTransformBroadcaster()
-  broadcaster.sendTransform(kinect_tforms)
+  broadcaster.sendTransform(tforms)
   rospy.spin()

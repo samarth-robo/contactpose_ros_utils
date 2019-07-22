@@ -28,7 +28,6 @@ piggy_bank
 stanford_bunny
 apple
 banana
-hand
 flashlight
 torus_small
 torus_medium
@@ -45,7 +44,7 @@ sphere_large
 cylinder_small
 cylinder_medium
 cylinder_large
-flute
 eyeglasses
 knife
 palm_print
+hands

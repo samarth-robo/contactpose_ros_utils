@@ -3,7 +3,7 @@ import open3d as o3d
 from lxml import etree
 import os
 import argparse
-from scripts.global_pointcloud_registration import register
+from global_pointcloud_registration import register
 
 osp = os.path
 o3dg = o3d.geometry

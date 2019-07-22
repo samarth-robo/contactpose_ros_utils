@@ -1,5 +1,6 @@
 <launch>
-    <arg name="serial_port" default="/dev/ttyUSB0"/>
+    <arg name="turntable_port" default="/dev/ttyUSB0"/>
+    <arg name="boson_port" default="/dev/ttyACM0"/>
     <arg name="kinect_res" default="qhd"/>
     <arg name="p_id"/>
     <arg name="date"/>
@@ -7,7 +8,7 @@
 
     <include file="$(find contactdb_utils)/launch/contactdb_cameras.launch">
         <arg name="kinect_res" value="$(arg kinect_res)"/>
-        <arg name="thermal" value="false"/>
+        <arg name="thermal" value="true"/>
         <arg name="date" value="$(arg date)"/>
     </include>
 
@@ -16,10 +17,15 @@
              value="$(find contactdb_utils)/data/mocap.yaml"/>
     </include>
 
+    <!-- Boson service listener -->
+    <include file="$(find flir_boson)/flir_boson.launch">
+        <arg name="serial_port" value="$(arg boson_port)"/>
+    </include>
+
     <node name="turntable_operator" pkg="contactdb_utils" cwd="node"
           type="operate_turntable.py" output="screen" required="true"
           args="
-          --serial_port $(arg serial_port)
+          --serial_port $(arg turntable_port)
           --data_dir $(find contactdb_utils)/data/contactdb_data/rosbags/$(arg p_id)
           --kinect_res $(arg kinect_res)"/>
 

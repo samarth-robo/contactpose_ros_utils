@@ -1,19 +1,19 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="align_optitrack_rigid_body" type="PythonConfigurationType" factoryName="Python">
-    <module name="contactdb_utils_v2" />
+  <configuration default="false" name="convert_calibration" type="PythonConfigurationType" factoryName="Python">
+    <module name="scripts" />
     <option name="INTERPRETER_OPTIONS" value="" />
     <option name="PARENT_ENVS" value="true" />
     <envs>
       <env name="PYTHONUNBUFFERED" value="1" />
     </envs>
-    <option name="SDK_HOME" value="$USER_HOME$/miniconda3/envs/mesh_python3/bin/python" />
-    <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/scripts" />
+    <option name="SDK_HOME" value="/usr/bin/python2.7" />
+    <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/" />
     <option name="IS_MODULE_SDK" value="false" />
     <option name="ADD_CONTENT_ROOTS" value="true" />
     <option name="ADD_SOURCE_ROOTS" value="true" />
     <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-    <option name="SCRIPT_NAME" value="$PROJECT_DIR$/scripts/align_optitrack_rigid_body.py" />
-    <option name="PARAMETERS" value="--pick $USER_HOME$/dropbox/contactdb_v2/data/stl_files_notched --object airplane" />
+    <option name="SCRIPT_NAME" value="$PROJECT_DIR$/convert_calibration.py" />
+    <option name="PARAMETERS" value="--input $USER_HOME$/dropbox/contactdb_v2/calibrations --date 2019-07-20" />
     <option name="SHOW_COMMAND_LINE" value="false" />
     <option name="EMULATE_TERMINAL" value="false" />
     <option name="MODULE_MODE" value="false" />

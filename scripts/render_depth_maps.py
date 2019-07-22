@@ -14,7 +14,7 @@ import meshrender as mr
 logger.setLevel(prev_level)
 
 
-def render_depth_maps(mesh_filename, intrinsic, extrinsics):
+def render_depth_maps(mesh_filename, intrinsic, extrinsics, mesh_scale=1.0):
   scene = mr.Scene()
 
   # setup camera
@@ -33,6 +33,8 @@ def render_depth_maps(mesh_filename, intrinsic, extrinsics):
   scene.camera = camera
 
   obj = trimesh.load_mesh(mesh_filename)
+  obj.apply_scale(mesh_scale)
+
   dmaps = []
   for T in extrinsics:
     obj_pose = RigidTransform(

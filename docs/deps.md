@@ -2,9 +2,12 @@
 # Dependencies
 1. Download [this fork](https://github.com/samarth-robo/Open3D/tree/surface_normals_for_colormapping) of Open3D. Make sure to get the `surface_normals_for_colormapping` branch. Compile it from source ([instructions](http://www.open3d.org/docs/compilation.html)).
 2. Install [ROS Kinetic Kame](http://wiki.ros.org/kinetic/Installation) (the `ros-kinetic-desktop-full` version).
-3. `sudo apt-get install python-qt4 python-pip ros-kinetic-ar-track-alvar ros-kinetic-camera-info-manager-py`
+3. `sudo apt-get install python-qt5`
 4. `pip install -r requirements.txt`
 5. Download and set up [ip_basic](https://github.com/kujason/ip_basic) for depth map hole filling, and add it to the `PYTHONPATH` environment variable.
+6. Set up the following repositories in your `catkin_ws/src`:
+- https://github.com/ros-perception/camera_info_manager_py
+- https://github.com/samarth-robo/mocap_optitrack
 
 Check that `#include <pcl/registration/boost.h>` is included in PCL's header file `ROOT/registration/warp_point_rigid.h`.
 

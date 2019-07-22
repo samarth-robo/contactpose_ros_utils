@@ -58,9 +58,7 @@ Visualization Manager:
       Frame Timeout: 15
       Frames:
         All Enabled: false
-        camera_frame:
-          Value: true
-        camera_frame_optitrack:
+        boson_frame:
           Value: true
         kinect2_left_ir_optical_frame:
           Value: false
@@ -84,6 +82,14 @@ Visualization Manager:
           Value: true
         rviz_frame:
           Value: false
+        turntable_base:
+          Value: true
+        turntable_frame:
+          Value: true
+        wine_glass_frame:
+          Value: true
+        wine_glass_frame_optitrack:
+          Value: true
       Marker Scale: 1
       Name: TF
       Show Arrows: true
@@ -92,9 +98,8 @@ Visualization Manager:
       Tree:
         rviz_frame:
           optitrack_frame:
-            camera_frame_optitrack:
-              camera_frame:
-                {}
+            boson_frame:
+              {}
             kinect2_left_link:
               kinect2_left_rgb_optical_frame:
                 kinect2_left_ir_optical_frame:
@@ -107,6 +112,9 @@ Visualization Manager:
               kinect2_right_rgb_optical_frame:
                 kinect2_right_ir_optical_frame:
                   {}
+            wine_glass_frame_optitrack:
+              wine_glass_frame:
+                {}
       Update Interval: 0
       Value: true
   Enabled: true
@@ -149,10 +157,10 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.00999999978
-      Pitch: 0.415201902
+      Pitch: 0.255201817
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 1.61542821
+      Yaw: 4.66044712
     Saved: ~
 Window Geometry:
   Displays:

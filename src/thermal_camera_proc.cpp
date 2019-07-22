@@ -64,8 +64,10 @@ void ThermalCameraProc::image_cb(const sensor_msgs::ImageConstPtr &im_in) {
   // find scaling values
   if (!constant_norm) {
     cv::minMaxLoc(im, &min_px, &max_px, NULL, NULL, agc_mask);
+    // min_px = 21900;
+    // max_px = 22900
+    // ROS_INFO_STREAM("Min = " << min_px << " Max = " << max_px);
   }
-  // min = 0; max = UINT16_MAX;
   double scale = UINT8_MAX / (max_px - min_px), bias = -min_px * scale;
 
   // rescale the thermal image to make it visible
