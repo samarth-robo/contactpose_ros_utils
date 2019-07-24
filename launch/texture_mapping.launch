@@ -1,10 +1,10 @@
 <launch>
-    <arg name="data_dir" default="$(find contactdb_utils)/data/contactdb_data"/>
-    <arg name="object_name"/>
     <arg name="p_id"/>
-    <arg name="calib_date"/>
+    <arg name="object_name"/>
+    <arg name="date"/>
+    <arg name="data_dir" default="$(find contactdb_utils)/data/contactdb_data"/>
     <arg name="kinect_res" default="qhd"/>
-    <arg name="vis" default="false"/>
+    <arg name="vis" default="true"/>
     <arg name="const_thermal_norm" default="false"/>
     <arg name="play_rate" default="0.75"/>
 
@@ -16,7 +16,7 @@
     <!-- TF players -->
     <node name="extrinsics_publisher" type="tf_publisher.py"
           pkg="contactdb_utils" output="screen" required="true"
-          args="--date $(arg calib_date)"/>
+          args="--date $(arg date)"/>
     <node name="object_tf_publisher" pkg="contactdb_utils" output="screen"
           type="optitrack_object_alignment_publisher.py"
           args="--object_name $(arg object_name)" required="true"/>
@@ -39,12 +39,13 @@
         <!-- texture mapping -->
         <node name="texture_mapping" pkg="contactdb_utils"
               type="texture_mapping2.py" output="screen" required="true"
-              args="--object $(arg object_name)" ns="boson">
+              args="--object $(arg object_name) --output ~/wine_glass.ply"
+              ns="boson">
         </node>
     </group>
 
     <!-- RViz -->
     <node name="rviz" pkg="rviz" type="rviz" output="screen" required="true"
-          args="-d $(find contactdb_utils)/rviz_files/check_optitrack_streaming.rviz"
+          args="-d $(find contactdb_utils)/rviz_files/texture_mapping.rviz"
           if="$(arg vis)"/>
 </launch>

@@ -99,12 +99,18 @@ def convert(input_dir, date):
       name, serial = line.strip().split()
       name2serial[name] = serial
 
-  intrinsics_output_dir = osp.join('..', 'calibrations', 'intrinsics', 'kinects', serial)
-  if not osp.isdir(intrinsics_output_dir):
-    os.makedirs(intrinsics_output_dir)
+  # extrinsics
+  extrinsics_output_dir = osp.join('..', 'calibrations', 'extrinsics', date)
+  if not osp.isdir(extrinsics_output_dir):
+    os.makedirs(extrinsics_output_dir)
 
   for kinect_name, serial in name2serial.items():
     # intrinsics
+    intrinsics_output_dir = osp.join('..', 'calibrations', 'intrinsics', 'kinects',
+      serial)
+    if not osp.isdir(intrinsics_output_dir):
+      os.makedirs(intrinsics_output_dir)
+
     json_filename = osp.join(input_dir, 'intrinsics',
                              'kinect_{:s}.json'.format(kinect_name))
     try:
@@ -158,11 +164,6 @@ def convert(input_dir, date):
     f.release()
     print('{:s} written.'.format(filename))
 
-    # extrinsics
-    extrinsics_output_dir = osp.join('..', 'calibrations', 'extrinsics', date)
-    if not osp.isdir(extrinsics_output_dir):
-      os.makedirs(extrinsics_output_dir)
-
     json_filename = osp.join(input_dir, 'extrinsics', date,
                              'kinect_{:s}_optitrack.json'.format(kinect_name))
     try:
@@ -188,24 +189,8 @@ def convert(input_dir, date):
         camera.write_depth(filename)
 
   # Thermal camera files
-  #intrinsics
-  json_filename = osp.join(input_dir, 'intrinsics', 'boson.json')
-  try:
-    with open(json_filename, 'r') as f:
-      data = json.load(f)
-  except IOError:
-    print('Could not find Boson intrinsics file {:s}'.format(json_filename))
-  camera = json2camera(data[0])
-  filename = 'package://contactdb_utils/calibrations/intrinsics/boson.yaml'
-  if camera.write_cinfo(filename, 'boson_frame', 'boson'):
-    print("{:s} written".format(filename))
-  else:
-    print('Could not write {:s}'.format(filename))
-
-  # extrinsics
-  extrinsics_output_dir = osp.join('..', 'calibrations', 'extrinsics', date)
-  if not osp.isdir(extrinsics_output_dir):
-    os.makedirs(extrinsics_output_dir)
+  # for thermal camera, the extrinsics calibration also refines intrinsics,
+  # so we take intrinsics from the extrinsics file
   json_filename = osp.join(input_dir, 'extrinsics', date, 'boson_optitrack.json')
   try:
     with open(json_filename, 'r') as f:
@@ -213,6 +198,13 @@ def convert(input_dir, date):
   except IOError:
     print('Could not find Boson extrinsics file {:s}'.format(json_filename))
   camera = json2camera(data[0])
+  # write intrinsics
+  filename = 'package://contactdb_utils/calibrations/intrinsics/boson.yaml'
+  if camera.write_cinfo(filename, 'boson_frame', 'boson'):
+    print("{:s} written".format(filename))
+  else:
+    print('Could not write {:s}'.format(filename))
+  # write extrinsics
   filename = osp.join(extrinsics_output_dir, 'boson.txt')
   np.savetxt(filename, camera.cTw)
   print('{:s} written.'.format(filename))

@@ -20,6 +20,11 @@ We offer both processed and raw forms of the data.
 links to 3D models suitable for printing, along with scaling information. We designed a mount for rigidly attaching the FLIR
 Boson camera to aa Kinect v2, you can find it
 [here](https://drive.google.com/file/d/1b-jSd6bSO9J4HP4xitSNaxbpIfzsovN8/view?usp=sharing).
+### Re-meshing objects
+Install PyMesh
+```
+for fstl in ~/dropbox/contactdb_v2/data/stl_files_mm/*.stl; do fply=$(echo $fstl | sed 's/stl/ply/g'); echo Processing ${fstl}; python fix_mesh.py $fstl $fply --detail high; done
+```
 
 ## Setup
 ### Using Processed Data

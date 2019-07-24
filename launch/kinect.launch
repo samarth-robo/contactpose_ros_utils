@@ -5,6 +5,7 @@
   <arg name="right" default="true"/>
   <arg name="middle" default="true"/>
   <arg name="max_depth" default="3.0"/>
+  <arg name="min_depth" default="0.0"/>
   <arg name="view" default="false"/>
   <arg name="view_images_only" default="true"/>
 
@@ -20,6 +21,7 @@
     <arg name="base_name" value="kinect2_left"/>
     <arg name="publish_tf" value="true"/>
     <arg name="max_depth" value="$(arg max_depth)"/>
+    <arg name="min_depth" value="$(arg min_depth)"/>
     <arg name="calib_path"
          value="$(find contactdb_utils)/calibrations/intrinsics/kinects"/>
     </include>
@@ -37,6 +39,7 @@
       <arg name="base_name" value="kinect2_right"/>
       <arg name="publish_tf" value="true"/>
       <arg name="max_depth" value="$(arg max_depth)"/>
+      <arg name="min_depth" value="$(arg min_depth)"/>
       <arg name="calib_path"
            value="$(find contactdb_utils)/calibrations/intrinsics/kinects"/>
     </include>
@@ -54,6 +57,7 @@
       <arg name="base_name" value="kinect2_middle"/>
       <arg name="publish_tf" value="true"/>
       <arg name="max_depth" value="$(arg max_depth)"/>
+      <arg name="min_depth" value="$(arg min_depth)"/>
       <arg name="calib_path"
            value="$(find contactdb_utils)/calibrations/intrinsics/kinects"/>
     </include>

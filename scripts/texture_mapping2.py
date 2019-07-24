@@ -39,7 +39,7 @@ def show_mesh(mesh):
 
 
 class TextureMapper:
-  def __init__(self, object_name):
+  def __init__(self, object_name, ignore_start=1e7, ignore_end=0):
     self.object_name = object_name
     self.camera_frame = 'boson_frame'
     self.object_frame = '{:s}_frame'.format(object_name)
@@ -57,6 +57,8 @@ class TextureMapper:
     self.last_msg_time = rospy.Time()
     self.start_time = rospy.Time()
     self.rx_initialized = False
+    self.ignore_start = rospy.Duration(ignore_start)
+    self.ignore_end = rospy.Duration(ignore_end)
 
 
   def image_cb(self, data):
@@ -65,8 +67,8 @@ class TextureMapper:
       self.start_time = self.last_msg_time
       self.rx_initialized = True
     else:
-      if ((self.last_msg_time - self.start_time > rospy.Duration(6)) and
-          (self.last_msg_time - self.start_time < rospy.Duration(8))):
+      if ((self.last_msg_time - self.start_time > self.ignore_end) and
+          (self.last_msg_time - self.start_time < self.ignore_end)):
         rospy.loginfo_throttle(0.5, 'Ignoring')
         return
 
@@ -97,13 +99,12 @@ class TextureMapper:
       rospy.loginfo('Done')
 
 
-  def texture_map(self, models_dir, depth_thresh_for_visibility=1e-2,
+  def texture_map(self, models_dir, output_filename, depth_thresh_for_visibility=1e-2,
       depth_thresh_for_discontinuity=0.035, max_vertex_normal_angle=70,
       mesh_scale=1e-3, show_textured_mesh=True, debug_mode=False):
     # read mesh file
-    mesh_filename = osp.join(models_dir, '{:s}.stl'.format(self.object_name))
-    mesh = trimesh.load_mesh(mesh_filename)
-    mesh = trimesh2open3d(mesh)
+    mesh_filename = osp.join(models_dir, '{:s}.ply'.format(self.object_name))
+    mesh = open3d.read_triangle_mesh(mesh_filename)
     mesh.transform(np.eye(4) * mesh_scale)
     if not mesh.has_vertex_normals():
       mesh.compute_vertex_normals()
@@ -147,6 +148,8 @@ class TextureMapper:
     option.max_angle_vertex_normal_camera_ray = max_vertex_normal_angle
     rospy.loginfo('Performing colormap optimization...')
     open3d.color_map_optimization(mesh, rgbds, traj, option)
+    open3d.write_triangle_mesh(output_filename, mesh)
+    print('{:s} written'.format(output_filename))
     if show_textured_mesh:
       show_mesh(mesh)
 
@@ -154,8 +157,9 @@ class TextureMapper:
 if __name__ == '__main__':
   parser = argparse.ArgumentParser()
   parser.add_argument('--object_name', required=True)
+  parser.add_argument('--output_filename', default='texture_map.py')
   parser.add_argument('--models_dir',
-    default='~/dropbox/contactdb_v2/data/stl_files_mm')
+    default='~/dropbox/contactdb_v2/data/ply_files_mm')
   parser.add_argument('--visibility_thresh', type=float, default=1e-2)
   parser.add_argument('--discontinuity_thresh', type=float, default=0.035)
   parser.add_argument('--vertex_normal_angle', type=float, default=70)
@@ -176,6 +180,7 @@ if __name__ == '__main__':
     rate.sleep()
 
   tm.texture_map(osp.expanduser(args.models_dir),
+    osp.expanduser(args.output_filename),
     depth_thresh_for_visibility=args.visibility_thresh,
     depth_thresh_for_discontinuity=args.discontinuity_thresh,
     max_vertex_normal_angle=args.vertex_normal_angle)

@@ -1,7 +1,7 @@
 <launch>
   <arg name="view" default="true"/>
   <arg name="camera_name" default="boson"/>
-  <arg name="const_norm" default="true"/>
+  <arg name="const_norm" default="false"/>
 
   <param name="$(arg camera_name)/image_raw_raw/compressed/format" value="png"/>
   <param name="$(arg camera_name)/image_raw_raw/compressed/png_level" value="5"/>
