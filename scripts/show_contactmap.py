@@ -71,7 +71,7 @@ def show_all_object_meshes(base_dir, filename_suffix='', sigmoid_a=0.05):
     if object_name == 'bags':
       continue
     show_object_mesh(osp.join(base_dir, object_name), filename_suffix,
-        sigmoid_k)
+        sigmoid_a)
 
 
 if __name__ == '__main__':

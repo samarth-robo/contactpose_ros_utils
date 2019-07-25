@@ -17,10 +17,41 @@ import sys
 import subprocess
 import os
 from PyQt5.QtWidgets import QApplication
-
+import cv2
+import multiprocessing as mp
 from recording_gui import RecordingGUI
 
 osp = os.path
+
+
+class StatusWindowProcess(mp.Process):
+  def __init__(self, status_var):
+    mp.Process.__init__(self)
+    self.status_var = status_var
+    self.win_name = 'status'
+
+  def _get_im(self, status):
+    """
+    :param status: 0: red 1: green
+    :return:
+    """
+    im = np.zeros((60, 60, 3), dtype=np.uint8)
+    if status == 1:
+      im[:, :, 1] = 255
+    elif status == 0:
+      im[:, :, 2] = 255
+
+    return im
+
+  def run(self):
+    while True:
+      with self.status_var.get_lock():
+        if self.status_var.value == 2:
+          break
+        im = self._get_im(self.status_var.value)
+      cv2.imshow(self.win_name, im)
+      cv2.waitKey(30)
+
 
 class RosbagRecord:
   """
@@ -99,6 +130,12 @@ class TurnTableOperator(object):
     self.boson_ffc_pub = rospy.Publisher('/flir/command/thermal/runffc', String,
                                          queue_size=1)
 
+    # status window
+    self.status_var = mp.Value('b', 0)
+    self.status_process = StatusWindowProcess(self.status_var)
+    self.status_process.daemon = True
+    self.status_process.start()
+
     # logging for the Arduino driver
     ch = logging.StreamHandler()
     ch.setLevel(logging.DEBUG)
@@ -121,6 +158,12 @@ class TurnTableOperator(object):
     self.arduino.motor_acceleration(motor_acceleration)
     rospy.sleep(0.5)
 
+  def __enter__(self):
+    return self
+
+  def __exit__(self, exc_type, exc_val, exc_tb):
+    self.disconnect()
+
   def publish_tfs(self, tt_angle):
     t = TransformStamped()  # pose of turntable_frame w.r.t. turntable_base
     t.header.stamp = rospy.Time.now()
@@ -136,15 +179,28 @@ class TurnTableOperator(object):
     t.transform.rotation.w = q[3]
     self.tt_bcaster.sendTransform([t, self.tt_base_pose])
 
+  def _set_recording_status(self, status):
+    with self.status_var.get_lock():
+      if status:
+        self.status_var.value = 1
+      else:
+        self.status_var.value = 0
+
   def record_hand_pose(self, object_name):
+    self._set_recording_status(True)
     self.hand_pose_recorder.start_recording(object_name)
+
+  def stop_record_hand_pose(self):
+    self.hand_pose_recorder.stop_recording_handler()
+    self._set_recording_status(False)
 
   def run_turntable(self, object_name):
     # first stop the hand pose recorder node if it is active
-    self.hand_pose_recorder.stop_recording_handler()
+    self.stop_record_hand_pose()
     # perform Boson FFC
     self.boson_ffc_pub.publish("00000001")
     # start recording for contactdb
+    self._set_recording_status(True)
     angle = 0
     self.contactdb_recorder.start_recording(object_name)
     rospy.sleep(1.5)
@@ -156,18 +212,24 @@ class TurnTableOperator(object):
       angle += self.step
       rospy.sleep(0.5)
     self.contactdb_recorder.stop_recording_handler()
+    self._set_recording_status(False)
 
   def disconnect(self):
     self.arduino.disconnect()
     rospy.loginfo('Disconnected from Arduino')
     self.contactdb_recorder.stop_recording_handler()
     self.hand_pose_recorder.stop_recording_handler()
+    rospy.loginfo('Waiting to join the status-window process...')
+    with self.status_var.get_lock():
+      self.status_var.value = 2
+    self.status_process.join()
+    rospy.loginfo('Done')
 
   def can_transform(self, object_name):
     try:
       self.tf_buffer.lookup_transform('optitrack_frame',
                                       '{:s}_frame_optitrack'.format(object_name),
-                                      rospy.Time.now(), rospy.Duration(5))
+                                      rospy.Time.now(), rospy.Duration(0.5))
       return True
     except (tf2_ros.LookupException, tf2_ros.ConnectivityException,
     tf2_ros.ExtrapolationException) as e:
@@ -192,35 +254,29 @@ if __name__ == '__main__':
       hand_pose=False)
   hand_pose_recorder = RosbagRecord(args.data_dir, args.kinect_res,
       hand_pose=True)
-  tt = TurnTableOperator(contactdb_recorder=contactdb_recorder,
+  with TurnTableOperator(contactdb_recorder=contactdb_recorder,
       hand_pose_recorder=hand_pose_recorder, serial_port=args.serial_port,
-      step=40)
-  rospy.on_shutdown(tt.disconnect)
-
-  def record_cb(object_name, hand_pose=False):
-    if not tt.can_transform(object_name):
-      return
-    if hand_pose:
-      tt.record_hand_pose(object_name)
-    else:
-      if tt.arduino._is_connected:
-        tt.run_turntable(object_name)
+      step=40) as tt:
+    def record_cb(object_name, hand_pose=False):
+      if object_name != 'hands':
+        while not tt.can_transform(object_name):
+          pass
+      if hand_pose:
+        tt.record_hand_pose(object_name)
       else:
-        rospy.logwarn('Turntable is not connected, not recording')
-  def contactdb_cb(object_name):
-    record_cb(object_name=object_name, hand_pose=False)
-  def hand_pose_cb(object_name):
-    record_cb(object_name=object_name, hand_pose=True)
+        if tt.arduino._is_connected:
+          tt.run_turntable(object_name)
+        else:
+          rospy.logwarn('Turntable is not connected, not recording')
+    def contactdb_cb(object_name):
+      record_cb(object_name=object_name, hand_pose=False)
+    def hand_pose_cb(object_name):
+      record_cb(object_name=object_name, hand_pose=True)
 
-  # read list of object
-  with open('object_names.txt', 'r') as f:
-    object_list = [l.rstrip() for l in f]
-  object_list = sorted(object_list)
-
-  # Qt stuff
-  app = QApplication(sys.argv)
-  gui = RecordingGUI(object_list,
-      contactdb_recording_cb=contactdb_cb,
-      hand_pose_recording_cb=hand_pose_cb)
-  gui.show()
-  sys.exit(app.exec_())
+    # Qt stuff
+    app = QApplication(sys.argv)
+    gui = RecordingGUI(contactdb_recording_cb=contactdb_cb,
+      hand_pose_recording_cb=hand_pose_cb,
+      stop_hand_pose_cb=tt.stop_record_hand_pose)
+    retval = app.exec_()
+  sys.exit(retval)

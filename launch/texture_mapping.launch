@@ -39,7 +39,7 @@
         <!-- texture mapping -->
         <node name="texture_mapping" pkg="contactdb_utils"
               type="texture_mapping2.py" output="screen" required="true"
-              args="--object $(arg object_name) --output ~/wine_glass.ply"
+              args="--object $(arg object_name) --output ~/toothbrush.ply"
               ns="boson">
         </node>
     </group>

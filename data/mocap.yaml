@@ -18,6 +18,51 @@ rigid_bodies:
         pose2d: wine_glass/ground_pose
         child_frame_id: wine_glass_frame_optitrack
         parent_frame_id: optitrack_frame
+    '54':
+        pose: palm_print/pose
+        pose2d: palm_print/ground_pose
+        child_frame_id: palm_print_frame_optitrack
+        parent_frame_id: optitrack_frame
+    '53':
+        pose: toothpaste/pose
+        pose2d: toothpaste/ground_pose
+        child_frame_id: toothpaste_frame_optitrack
+        parent_frame_id: optitrack_frame
+    '10':
+        pose: flashlight/pose
+        pose2d: flashlight/ground_pose
+        child_frame_id: flashlight_frame_optitrack
+        parent_frame_id: optitrack_frame
+    '11':
+        pose: binoculars/pose
+        pose2d: binoculars/ground_pose
+        child_frame_id: binoculars_frame_optitrack
+        parent_frame_id: optitrack_frame
+    '16':
+        pose: apple/pose
+        pose2d: apple/ground_pose
+        child_frame_id: apple_frame_optitrack
+        parent_frame_id: optitrack_frame
+    '43':
+        pose: stapler/pose
+        pose2d: stapler/ground_pose
+        child_frame_id: stapler_frame_optitrack
+        parent_frame_id: optitrack_frame
+    '51':
+        pose: pan/pose
+        pose2d: pan/ground_pose
+        child_frame_id: pan_frame_optitrack
+        parent_frame_id: optitrack_frame
+    '28':
+        pose: cell_phone/pose
+        pose2d: cell_phone/ground_pose
+        child_frame_id: cell_phone_frame_optitrack
+        parent_frame_id: optitrack_frame
+    '26':
+        pose: scissors/pose
+        pose2d: scissors/ground_pose
+        child_frame_id: scissors_frame_optitrack
+        parent_frame_id: optitrack_frame
 optitrack_config:
         multicast_address: 239.255.42.99
         command_port: 1510
