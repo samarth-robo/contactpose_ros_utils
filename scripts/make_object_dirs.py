@@ -4,7 +4,6 @@ the play_bag launch file can be run
 """
 import os
 import argparse
-from subprocess import Popen
 import dataset_utils
 from IPython.core.debugger import set_trace
 osp = os.path
@@ -33,19 +32,6 @@ def make_dir(base_dir, object_name, bag_filename, count=0,
       merge_filename = osp.join(dir_name, 'merge.txt')
       with open(merge_filename, 'w') as f:
         pass
-
-    # play the bag file
-    data_dir = osp.join(base_dir, '..')
-    # determine if the session was recorded with the old system
-    old = int(session_name.split('_')[0].strip('full')) <= 4
-    cmd = 'roslaunch contactdb_utils play_bag.launch data_dir:={:s} ' \
-          'object_name:={:s} p_id:={:s}'.format(data_dir, object_name,
-      session_name)
-    if old:
-      cmd += ' old:=true'
-    if re_extract:
-      cmd += ' re_extract:=true'
-    Popen(cmd, shell=True).wait()
 
 
 def create_dirs(instructions, session_nums, object_names, re_extract):

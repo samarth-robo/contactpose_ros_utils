@@ -2,15 +2,26 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="10d0af61-b2b6-42f0-8d22-24518f889199" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/runConfigurations/create_mocap_file.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/create_mocap_file.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../calibrations/intrinsics/boson.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../calibrations/intrinsics/boson.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../calibrations/intrinsics/kinects/001329665147/calib_depth.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../calibrations/intrinsics/kinects/001329665147/calib_depth.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../calibrations/intrinsics/kinects/004279661647/calib_depth.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../calibrations/intrinsics/kinects/004279661647/calib_depth.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../calibrations/intrinsics/kinects/022402465047/calib_depth.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../calibrations/intrinsics/kinects/022402465047/calib_depth.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../data/mocap.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../data/mocap.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../docs/recording_steps.md" beforeDir="false" afterPath="$PROJECT_DIR$/../docs/recording_steps.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../launch/texture_mapping.launch" beforeDir="false" afterPath="$PROJECT_DIR$/../launch/texture_mapping.launch" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../rviz_files/texture_mapping.rviz" beforeDir="false" afterPath="$PROJECT_DIR$/../rviz_files/texture_mapping.rviz" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/align_optitrack_rigid_body.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/runConfigurations/align_optitrack_rigid_body.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/recording_gui.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/runConfigurations/recording_gui.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/convert_calibration.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/runConfigurations/convert_calibration.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/global_pointcloud_registration.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/runConfigurations/global_pointcloud_registration.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/align_optitrack_rigid_body.py" beforeDir="false" afterPath="$PROJECT_DIR$/align_optitrack_rigid_body.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/global_pointcloud_registration.py" beforeDir="false" afterPath="$PROJECT_DIR$/global_pointcloud_registration.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/make_object_dirs.py" beforeDir="false" afterPath="$PROJECT_DIR$/make_object_dirs.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/operate_turntable.py" beforeDir="false" afterPath="$PROJECT_DIR$/operate_turntable.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/recording_gui.py" beforeDir="false" afterPath="$PROJECT_DIR$/recording_gui.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/show_contactmap.py" beforeDir="false" afterPath="$PROJECT_DIR$/show_contactmap.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/texture_mapping2.py" beforeDir="false" afterPath="$PROJECT_DIR$/texture_mapping2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/warmup_turntable.py" beforeDir="false" afterPath="$PROJECT_DIR$/warmup_turntable.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -23,8 +34,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/operate_turntable.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret line="234" column="23" selection-start-line="234" selection-start-column="23" selection-end-line="234" selection-end-column="23" />
+            <state relative-caret-position="1998">
+              <caret line="111" column="29" selection-start-line="111" selection-start-column="29" selection-end-line="111" selection-end-column="29" />
               <folding>
                 <element signature="e#236#250#0" expanded="true" />
               </folding>
@@ -33,40 +44,48 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/recording_gui.py">
+        <entry file="file://$PROJECT_DIR$/../launch/texture_mapping.launch">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-477">
-              <caret line="31" column="76" selection-start-line="31" selection-start-column="76" selection-end-line="31" selection-end-column="76" />
+            <state relative-caret-position="486">
+              <caret line="27" column="44" selection-start-line="27" selection-start-column="44" selection-end-line="27" selection-end-column="44" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../launch/contactdb_cameras.launch">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/texture_mapping2.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2304">
+              <caret line="128" column="39" selection-start-line="128" selection-start-column="39" selection-end-line="128" selection-end-column="39" />
               <folding>
-                <element signature="e#0#10#0" expanded="true" />
+                <element signature="e#23#37#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../launch/record_object.launch">
+        <entry file="file://$PROJECT_DIR$/warmup_turntable.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="324">
-              <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
+            <state relative-caret-position="378">
+              <caret line="21" selection-start-line="21" selection-end-line="21" />
+              <folding>
+                <element signature="e#0#37#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/play_bag.sh">
+        <entry file="file://$PROJECT_DIR$/../launch/check_optitrack_streaming.launch">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="288">
               <caret line="16" selection-start-line="16" selection-end-line="16" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../launch/texture_mapping.launch">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="378">
-              <caret line="21" column="61" selection-start-line="21" selection-start-column="61" selection-end-line="21" selection-end-column="61" />
             </state>
           </provider>
         </entry>
@@ -86,32 +105,34 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/warmup_turntable.py" />
         <option value="$PROJECT_DIR$/tf_publisher.py" />
         <option value="$PROJECT_DIR$/paper_scripts/texture_mapping2.py" />
-        <option value="$PROJECT_DIR$/align_optitrack_rigid_body.py" />
         <option value="$PROJECT_DIR$/render_depth_maps.py" />
         <option value="$PROJECT_DIR$/play_bag.sh" />
         <option value="$PROJECT_DIR$/../launch/thermal.launch" />
         <option value="$PROJECT_DIR$/../calibrations/intrinsics/boson.yaml" />
         <option value="$PROJECT_DIR$/convert_calibration.py" />
         <option value="$PROJECT_DIR$/contactdb_record.sh" />
-        <option value="$PROJECT_DIR$/texture_mapping2.py" />
         <option value="$PROJECT_DIR$/../launch/play_bag.launch" />
-        <option value="$PROJECT_DIR$/../launch/texture_mapping.launch" />
-        <option value="$PROJECT_DIR$/../data/mocap.yaml" />
         <option value="$PROJECT_DIR$/check_avg_contacted_points.py" />
         <option value="$PROJECT_DIR$/show_contactmap.py" />
-        <option value="$PROJECT_DIR$/operate_turntable.py" />
         <option value="$PROJECT_DIR$/recording_gui.py" />
+        <option value="$PROJECT_DIR$/global_pointcloud_registration.py" />
+        <option value="$PROJECT_DIR$/align_optitrack_rigid_body.py" />
+        <option value="$PROJECT_DIR$/../data/mocap.yaml" />
+        <option value="$PROJECT_DIR$/operate_turntable.py" />
+        <option value="$PROJECT_DIR$/create_mocap_file.py" />
+        <option value="$PROJECT_DIR$/make_object_dirs.py" />
+        <option value="$PROJECT_DIR$/warmup_turntable.py" />
+        <option value="$PROJECT_DIR$/texture_mapping2.py" />
+        <option value="$PROJECT_DIR$/../launch/texture_mapping.launch" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="2559" />
     <option name="y" value="-4" />
-    <option name="width" value="2562" />
-    <option name="height" value="1605" />
+    <option name="width" value="2560" />
+    <option name="height" value="1604" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="false" id="Update" />
@@ -146,6 +167,12 @@
             <path>
               <item name="scripts" type="b2602c69:ProjectViewProjectNode" />
               <item name="scripts" type="47feb1d3:ProjectViewModuleNode" />
+              <item name="data" type="462c0819:PsiDirectoryNode" />
+              <item name="contactdb_data" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="scripts" type="b2602c69:ProjectViewProjectNode" />
+              <item name="scripts" type="47feb1d3:ProjectViewModuleNode" />
               <item name="launch" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -159,12 +186,15 @@
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/show_contactmap.py" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/create_mocap_file.py" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PythonContentEntriesConfigurable" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
     </key>
@@ -181,7 +211,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.recording_gui">
+  <component name="RunManager" selected="Python.convert_calibration">
     <configuration name="show_mesh" type="PythonConfigurationType" factoryName="Python">
       <module name="scripts" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -206,6 +236,7 @@
     </configuration>
     <list>
       <item itemvalue="Python.align_optitrack_rigid_body" />
+      <item itemvalue="Python.create_mocap_file" />
       <item itemvalue="Python.show_mesh" />
       <item itemvalue="Python.check_kinect_calibration" />
       <item itemvalue="Python.convert_calibration" />
@@ -233,7 +264,25 @@
       <workItem from="1563847531384" duration="4518000" />
       <workItem from="1563932160347" duration="4252000" />
       <workItem from="1563938555013" duration="737000" />
-      <workItem from="1563995316997" duration="22038000" />
+      <workItem from="1563995316997" duration="22762000" />
+      <workItem from="1564099107109" duration="9000" />
+      <workItem from="1564436538997" duration="7712000" />
+      <workItem from="1564455982288" duration="74000" />
+      <workItem from="1564456165828" duration="189000" />
+      <workItem from="1564458268231" duration="3945000" />
+      <workItem from="1564513990222" duration="3727000" />
+      <workItem from="1564523406065" duration="211000" />
+      <workItem from="1564531801836" duration="3066000" />
+      <workItem from="1564540418366" duration="8000" />
+      <workItem from="1564540501280" duration="19000" />
+      <workItem from="1564540534671" duration="5328000" />
+      <workItem from="1564595017494" duration="19000" />
+      <workItem from="1564611552732" duration="3607000" />
+      <workItem from="1564679124577" duration="615000" />
+      <workItem from="1564764059852" duration="22000" />
+      <workItem from="1564771902861" duration="1365000" />
+      <workItem from="1564801235411" duration="9000" />
+      <workItem from="1565033995712" duration="969000" />
     </task>
     <task id="LOCAL-00001" summary="lots of small changes, texture mapping works">
       <created>1563764160631</created>
@@ -249,32 +298,39 @@
       <option name="project" value="LOCAL" />
       <updated>1563939478490</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="changes to recording GUI to pull the object name from published frames">
+      <created>1564097458849</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1564097458849</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="63985000" />
+    <option name="totallyTimeSpent" value="95603000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="2559" y="-4" width="2562" height="1605" extended-state="6" />
+    <frame x="-2560" y="-4" width="2560" height="1604" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16984884" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19689737" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32978016" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.4350433" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3997335" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" weight="0.32911393" />
+      <window_info anchor="bottom" id="Version Control" order="8" weight="0.31778228" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.3191206" />
-      <window_info anchor="bottom" id="Python Console" order="12" weight="0.32978016" />
+      <window_info anchor="bottom" id="Python Console" order="12" weight="0.32927653" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -288,14 +344,15 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="lots of small changes, texture mapping works" />
     <MESSAGE value="big bug fix in convert_calibration, lots of small changes, working contact map + hand pose" />
-    <option name="LAST_COMMIT_MESSAGE" value="big bug fix in convert_calibration, lots of small changes, working contact map + hand pose" />
+    <MESSAGE value="changes to recording GUI to pull the object name from published frames" />
+    <option name="LAST_COMMIT_MESSAGE" value="changes to recording GUI to pull the object name from published frames" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/texture_mapping2.py</url>
-          <line>117</line>
+          <line>122</line>
           <option name="timeStamp" value="3" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -308,16 +365,23 @@
           <line>106</line>
           <option name="timeStamp" value="9" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/global_pointcloud_registration.py</url>
+          <line>68</line>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/scripts$convert_calibration.coverage" NAME="convert_calibration Coverage Results" MODIFIED="1563928464458" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/" />
+    <SUITE FILE_PATH="coverage/scripts$create_mocap_file.coverage" NAME="create_mocap_file Coverage Results" MODIFIED="1564538458739" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/scripts$show_mesh.coverage" NAME="show_mesh Coverage Results" MODIFIED="1564015025194" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/scripts$convert_calibration.coverage" NAME="convert_calibration Coverage Results" MODIFIED="1565034004833" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/" />
     <SUITE FILE_PATH="coverage/scripts$texture_mapping.coverage" NAME="texture_mapping Coverage Results" MODIFIED="1563761914538" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/scripts$global_pointcloud_registration.coverage" NAME="global_pointcloud_registration Coverage Results" MODIFIED="1564452532132" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/scripts$recording_gui.coverage" NAME="recording_gui Coverage Results" MODIFIED="1564097150513" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/scripts$warmup_turntable.coverage" NAME="warmup_turntable Coverage Results" MODIFIED="1563592187699" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/scripts$align_optitrack_rigid_body.coverage" NAME="align_optitrack_rigid_body Coverage Results" MODIFIED="1563995508954" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/scripts$warmup_turntable.coverage" NAME="warmup_turntable Coverage Results" MODIFIED="1564587733845" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/scripts$align_optitrack_rigid_body.coverage" NAME="align_optitrack_rigid_body Coverage Results" MODIFIED="1564546455528" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="breakpointCondition">
@@ -329,36 +393,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/../.idea/.name">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/horus.log" />
-    <entry file="file://$PROJECT_DIR$/warmup_turntable.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="20" column="4" selection-start-line="20" selection-start-column="4" selection-end-line="20" selection-end-column="4" />
-          <folding>
-            <element signature="e#0#37#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/check_kinect_calibration.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#20#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tf_publisher.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="702">
-          <caret line="73" selection-start-line="73" selection-end-line="73" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/__init__.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -456,13 +490,6 @@
     <entry file="file://$PROJECT_DIR$/../calibrations/kinect_serial_numbers.txt">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/../launch/thermal.launch">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="25" column="53" selection-start-line="25" selection-start-column="53" selection-end-line="25" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/convert_calibration.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="729">
@@ -494,43 +521,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dataset_utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#14#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/align_optitrack_rigid_body.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="8" column="1" selection-start-line="8" selection-start-column="1" selection-end-line="8" selection-end-column="1" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/optitrack_object_alignment_publisher.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="558">
           <caret line="32" column="7" selection-start-line="32" selection-start-column="7" selection-end-line="32" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../launch/texture_mapping.launch">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="21" column="61" selection-start-line="21" selection-start-column="61" selection-end-line="21" selection-end-column="61" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../data/mocap.yaml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="324">
-          <caret line="18" column="49" selection-start-line="18" selection-start-column="49" selection-end-line="18" selection-end-column="49" />
         </state>
       </provider>
     </entry>
@@ -541,50 +535,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../launch/check_optitrack_streaming.launch">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/play_bag.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="16" selection-start-line="16" selection-end-line="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/hand_pose_record.sh">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/check_avg_contacted_points.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="5" column="2" selection-start-line="5" selection-start-column="2" selection-end-line="5" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/show_contactmap.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1620">
-          <caret line="90" selection-start-line="90" selection-end-line="90" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/texture_mapping2.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="151" column="46" selection-start-line="151" selection-start-column="46" selection-end-line="151" selection-end-column="46" />
-          <folding>
-            <element signature="e#23#37#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/check_avg_contacted_points.py" />
     <entry file="file://$PROJECT_DIR$/texture_mapping.py">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -609,12 +563,40 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/operate_turntable.py">
+    <entry file="file:///usr/lib/python2.7/dist-packages/scipy/special/basic.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="234" column="23" selection-start-line="234" selection-start-column="23" selection-end-line="234" selection-end-column="23" />
+        <state relative-caret-position="291">
+          <caret line="1995" column="4" selection-start-line="1995" selection-start-column="4" selection-end-line="1995" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/recording_gui.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1422">
+          <caret line="86" column="31" selection-start-line="86" selection-start-column="31" selection-end-line="86" selection-end-column="31" />
           <folding>
-            <element signature="e#236#250#0" expanded="true" />
+            <element signature="e#0#10#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/align_optitrack_rigid_body.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="720">
+          <caret line="40" column="39" selection-start-line="40" selection-start-column="39" selection-end-line="40" selection-end-column="39" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mocap.yaml" />
+    <entry file="file://$PROJECT_DIR$/global_pointcloud_registration.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="648">
+          <caret line="41" column="28" selection-start-line="41" selection-start-column="28" selection-end-line="41" selection-end-column="28" />
+          <folding>
+            <element signature="e#0#20#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -622,17 +604,122 @@
     <entry file="file://$PROJECT_DIR$/../launch/record_object.launch">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="324">
-          <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
+          <caret line="18" selection-start-line="18" selection-end-line="18" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/recording_gui.py">
+    <entry file="file://$PROJECT_DIR$/play_bag.sh">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-477">
-          <caret line="31" column="76" selection-start-line="31" selection-start-column="76" selection-end-line="31" selection-end-column="76" />
+        <state relative-caret-position="288">
+          <caret line="16" selection-start-line="16" selection-end-line="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../launch/thermal.launch">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="25" column="53" selection-start-line="25" selection-start-column="53" selection-end-line="25" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../data/new_mocap.yaml" />
+    <entry file="file://$PROJECT_DIR$/create_mocap_file.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="20" selection-start-line="20" selection-end-line="20" />
           <folding>
-            <element signature="e#0#10#0" expanded="true" />
+            <element signature="e#0#22#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/make_object_dirs.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="11" selection-start-line="11" selection-end-line="11" />
+          <folding>
+            <element signature="e#122#131#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dataset_utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/reset_poses.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="846">
+          <caret line="49" column="52" selection-start-line="49" selection-start-column="52" selection-end-line="49" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../data/mocap.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="15" column="6" selection-start-line="15" selection-start-column="6" selection-end-line="15" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/show_contactmap.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1438">
+          <caret line="90" selection-start-line="90" selection-end-line="90" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/operate_turntable.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1998">
+          <caret line="111" column="29" selection-start-line="111" selection-start-column="29" selection-end-line="111" selection-end-column="29" />
+          <folding>
+            <element signature="e#236#250#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../launch/contactdb_cameras.launch">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/texture_mapping2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2304">
+          <caret line="128" column="39" selection-start-line="128" selection-start-column="39" selection-end-line="128" selection-end-column="39" />
+          <folding>
+            <element signature="e#23#37#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/warmup_turntable.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="21" selection-start-line="21" selection-end-line="21" />
+          <folding>
+            <element signature="e#0#37#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../launch/check_optitrack_streaming.launch">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="16" selection-start-line="16" selection-end-line="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../launch/texture_mapping.launch">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="486">
+          <caret line="27" column="44" selection-start-line="27" selection-start-column="44" selection-end-line="27" selection-end-column="44" />
         </state>
       </provider>
     </entry>

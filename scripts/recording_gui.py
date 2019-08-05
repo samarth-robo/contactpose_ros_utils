@@ -70,15 +70,15 @@ class RecordingGUI(QWidget):
     self.hand_pose_record_button.clicked.connect(partial(self.record_cb,
       hand_pose=True))
     self.button_grid.addWidget(self.hand_pose_record_button, 0, 0)
+    self.stop_hand_pose_record_button = QPushButton('Stop Hand Pose',
+      parent=self)
+    self.stop_hand_pose_record_button.clicked.connect(self.stop_hand_pose_slot)
+    self.button_grid.addWidget(self.stop_hand_pose_record_button, 0, 1)
     self.contactdb_record_button = QPushButton('Record ContactDB',
         parent=self)
     self.contactdb_record_button.clicked.connect(partial(self.record_cb,
       hand_pose=False))
-    self.button_grid.addWidget(self.contactdb_record_button, 0, 1)
-    self.stop_hand_pose_record_button = QPushButton('Stop Hand Pose',
-      parent=self)
-    self.stop_hand_pose_record_button.clicked.connect(self.stop_hand_pose_slot)
-    self.button_grid.addWidget(self.stop_hand_pose_record_button, 0, 2)
+    self.button_grid.addWidget(self.contactdb_record_button, 0, 2)
 
     # main layout
     self.vlayout = QVBoxLayout()

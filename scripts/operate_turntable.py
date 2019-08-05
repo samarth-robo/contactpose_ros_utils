@@ -109,7 +109,7 @@ class RosbagRecord:
 
 class TurnTableOperator(object):
   def __init__(self, serial_port, contactdb_recorder, hand_pose_recorder,
-      step=3, motor_speed=150, motor_acceleration=200):
+      step=40, motor_speed=50, motor_acceleration=100):
     """"
     :param serial_port:
     :param {contactdb,hand_pose}_recorder: Object of the RosbagRecord class
@@ -256,7 +256,7 @@ if __name__ == '__main__':
       hand_pose=True)
   with TurnTableOperator(contactdb_recorder=contactdb_recorder,
       hand_pose_recorder=hand_pose_recorder, serial_port=args.serial_port,
-      step=40) as tt:
+      step=360) as tt:
     def record_cb(object_name, hand_pose=False):
       if object_name != 'hands':
         while not tt.can_transform(object_name):

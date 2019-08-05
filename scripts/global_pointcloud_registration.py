@@ -6,13 +6,14 @@ from itertools import combinations
 from scipy.special import comb
 
 
-def draw_registration_result(source, target, transformation):
+def draw_registration_result(source, target, source_mesh, transformation):
   source_temp = copy.deepcopy(source)
   target_temp = copy.deepcopy(target)
   source_temp.paint_uniform_color([1, 0.706, 0])
   target_temp.paint_uniform_color([0, 0.651, 0.929])
-  source_temp.transform(transformation)
-  o3d.visualization.draw_geometries([source_temp, target_temp])
+  target_temp.transform(np.linalg.inv(transformation))
+  source_mesh.compute_vertex_normals()
+  o3d.visualization.draw_geometries([source_mesh, source_temp, target_temp])
 
 
 def execute_global_registration(source, target, source_fpfh, target_fpfh,
@@ -55,32 +56,44 @@ def compute_feature(pc, nns=-1, nvs=2):
   return out
 
 
-def register(source, target, distance_thresh_mm=3.0):
-  assert len(source.points) <= len(target.points)
-  source_fpfh = compute_feature(source)
+def register(source, target, source_mesh, n_source_markers,
+    distance_thresh_mm=3.0):
+  assert n_source_markers <= len(target.points)
+  assert len(source.points) >= n_source_markers
+  n_source_iters = comb(len(source.points), n_source_markers, exact=True)
+  n_target_iters = comb(len(target.points), n_source_markers, exact=True)
+  source_points = np.asarray(source.points)
   target_points = np.asarray(target.points)
   result = o3d.registration.RegistrationResult()
-  n_iters = comb(len(target.points), len(source.points), exact=True)
-  i_iter = 0
-  for target_idx in combinations(range(len(target.points)), len(source.points)):
-    print('Iter {:d} / {:d}'.format(i_iter, n_iters))
-    target_idx = list(target_idx)
-    this_target = o3d.geometry.PointCloud()
-    this_target.points = o3d.utility.Vector3dVector(target_points[target_idx])
-    target_fpfh = compute_feature(this_target)
-    this_result = execute_global_registration(source, this_target, source_fpfh,
-                                         target_fpfh, distance_thresh_mm)
-    if (this_result.fitness > result.fitness) or \
-      (this_result.fitness == result.fitness and
-       this_result.inlier_rmse < result.inlier_rmse):
-      print('Better solution found')
-      result = this_result
-    i_iter += 1
+  s_iter = 1
+  for source_idx in combinations(range(len(source.points)), n_source_markers):
+    print(''.format(s_iter, n_source_iters))
+    source_idx = list(source_idx)
+    this_source = o3d.geometry.PointCloud()
+    this_source.points = o3d.utility.Vector3dVector(source_points[source_idx])
+    source_fpfh = compute_feature(this_source)
+    t_iter = 1
+    for target_idx in combinations(range(len(target.points)), n_source_markers):
+      print('Target Iter {:d} / {:d}, Source Iter {:d} / {:d}'.format(t_iter,
+        n_target_iters, s_iter, n_source_iters))
+      target_idx = list(target_idx)
+      this_target = o3d.geometry.PointCloud()
+      this_target.points = o3d.utility.Vector3dVector(target_points[target_idx])
+      target_fpfh = compute_feature(this_target)
+      this_result = execute_global_registration(this_source, this_target,
+        source_fpfh, target_fpfh, distance_thresh_mm)
+      if (this_result.fitness > result.fitness) or \
+        (this_result.fitness == result.fitness and
+         this_result.inlier_rmse < result.inlier_rmse):
+        print('Better solution found')
+        result = this_result
+      t_iter += 1
+    s_iter += 1
   print('# inliers = {:d}, Inlier RMSE = {:f} mm'.
         format(len(result.correspondence_set), result.inlier_rmse))
   print('Recovered transform = ')
   print(result.transformation)
-  draw_registration_result(source, target, result.transformation)
+  draw_registration_result(source, target, source_mesh, result.transformation)
   return result.transformation.copy()
 
 
@@ -106,6 +119,6 @@ if __name__ == '__main__':
 
   dst.transform(T)
 
-  register(src, dst)
+  register(src, dst, len(source))
   print('Original transform = ')
   print(T)

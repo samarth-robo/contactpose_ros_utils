@@ -1,69 +1,235 @@
-#
-# Definition of all trackable objects
-# Identifier corresponds to Trackable ID set in Tracking Tools
-#
-rigid_bodies:
-    '5':
-        pose: toothbrush/pose
-        pose2d: toothbrush/ground_pose
-        child_frame_id: toothbrush_frame_optitrack
-        parent_frame_id: optitrack_frame
-    '6':
-        pose: camera/pose
-        pose2d: camera/ground_pose
-        child_frame_id: camera_frame_optitrack
-        parent_frame_id: optitrack_frame
-    '42':
-        pose: wine_glass/pose
-        pose2d: wine_glass/ground_pose
-        child_frame_id: wine_glass_frame_optitrack
-        parent_frame_id: optitrack_frame
-    '54':
-        pose: palm_print/pose
-        pose2d: palm_print/ground_pose
-        child_frame_id: palm_print_frame_optitrack
-        parent_frame_id: optitrack_frame
-    '53':
-        pose: toothpaste/pose
-        pose2d: toothpaste/ground_pose
-        child_frame_id: toothpaste_frame_optitrack
-        parent_frame_id: optitrack_frame
-    '10':
-        pose: flashlight/pose
-        pose2d: flashlight/ground_pose
-        child_frame_id: flashlight_frame_optitrack
-        parent_frame_id: optitrack_frame
-    '11':
-        pose: binoculars/pose
-        pose2d: binoculars/ground_pose
-        child_frame_id: binoculars_frame_optitrack
-        parent_frame_id: optitrack_frame
-    '16':
-        pose: apple/pose
-        pose2d: apple/ground_pose
-        child_frame_id: apple_frame_optitrack
-        parent_frame_id: optitrack_frame
-    '43':
-        pose: stapler/pose
-        pose2d: stapler/ground_pose
-        child_frame_id: stapler_frame_optitrack
-        parent_frame_id: optitrack_frame
-    '51':
-        pose: pan/pose
-        pose2d: pan/ground_pose
-        child_frame_id: pan_frame_optitrack
-        parent_frame_id: optitrack_frame
-    '28':
-        pose: cell_phone/pose
-        pose2d: cell_phone/ground_pose
-        child_frame_id: cell_phone_frame_optitrack
-        parent_frame_id: optitrack_frame
-    '26':
-        pose: scissors/pose
-        pose2d: scissors/ground_pose
-        child_frame_id: scissors_frame_optitrack
-        parent_frame_id: optitrack_frame
 optitrack_config:
-        multicast_address: 239.255.42.99
-        command_port: 1510
-        data_port: 1511
+  command_port: 1510
+  data_port: 1511
+  multicast_address: 239.255.42.99
+rigid_bodies:
+  '10':
+    child_frame_id: flashlight_frame_optitrack
+    parent_frame_id: optitrack_frame
+    pose: flashlight/pose
+    pose2d: flashlight/ground_pose
+  '11':
+    child_frame_id: binoculars_frame_optitrack
+    parent_frame_id: optitrack_frame
+    pose: binoculars/pose
+    pose2d: binoculars/ground_pose
+  '12':
+    child_frame_id: mouse_frame_optitrack
+    parent_frame_id: optitrack_frame
+    pose: mouse/pose
+    pose2d: mouse/ground_pose
+  '14':
+    child_frame_id: headphones_frame_optitrack
+    parent_frame_id: optitrack_frame
+    pose: headphones/pose
+    pose2d: headphones/ground_pose
+  '15':
+    child_frame_id: knife_frame_optitrack
+    parent_frame_id: optitrack_frame
+    pose: knife/pose
+    pose2d: knife/ground_pose
+  '16':
+    child_frame_id: apple_frame_optitrack
+    parent_frame_id: optitrack_frame
+    pose: apple/pose
+    pose2d: apple/ground_pose
+  '17':
+    child_frame_id: light_bulb_frame_optitrack
+    parent_frame_id: optitrack_frame
+    pose: light_bulb/pose
+    pose2d: light_bulb/ground_pose
+  '19':
+    child_frame_id: mug_frame_optitrack
+    parent_frame_id: optitrack_frame
+    pose: mug/pose
+    pose2d: mug/ground_pose
+  '20':
+    child_frame_id: ps_controller_frame_optitrack
+    parent_frame_id: optitrack_frame
+    pose: ps_controller/pose
+    pose2d: ps_controller/ground_pose
+  '21':
+    child_frame_id: cube_medium_frame_optitrack
+    parent_frame_id: optitrack_frame
+    pose: cube_medium/pose
+    pose2d: cube_medium/ground_pose
+  '22':
+    child_frame_id: cylinder_small_frame_optitrack
+    parent_frame_id: optitrack_frame
+    pose: cylinder_small/pose
+    pose2d: cylinder_small/ground_pose
+  '23':
+    child_frame_id: bowl_frame_optitrack
+    parent_frame_id: optitrack_frame
+    pose: bowl/pose
+    pose2d: bowl/ground_pose
+  '24':
+    child_frame_id: torus_medium_frame_optitrack
+    parent_frame_id: optitrack_frame
+    pose: torus_medium/pose
+    pose2d: torus_medium/ground_pose
+  '25':
+    child_frame_id: pyramid_large_frame_optitrack
+    parent_frame_id: optitrack_frame
+    pose: pyramid_large/pose
+    pose2d: pyramid_large/ground_pose
+  '26':
+    child_frame_id: scissors_frame_optitrack
+    parent_frame_id: optitrack_frame
+    pose: scissors/pose
+    pose2d: scissors/ground_pose
+  '29':
+    child_frame_id: banana_frame_optitrack
+    parent_frame_id: optitrack_frame
+    pose: banana/pose
+    pose2d: banana/ground_pose
+  '31':
+    child_frame_id: utah_teapot_frame_optitrack
+    parent_frame_id: optitrack_frame
+    pose: utah_teapot/pose
+    pose2d: utah_teapot/ground_pose
+  '32':
+    child_frame_id: torus_large_frame_optitrack
+    parent_frame_id: optitrack_frame
+    pose: torus_large/pose
+    pose2d: torus_large/ground_pose
+  '33':
+    child_frame_id: rubber_duck_frame_optitrack
+    parent_frame_id: optitrack_frame
+    pose: rubber_duck/pose
+    pose2d: rubber_duck/ground_pose
+  '34':
+    child_frame_id: water_bottle_frame_optitrack
+    parent_frame_id: optitrack_frame
+    pose: water_bottle/pose
+    pose2d: water_bottle/ground_pose
+  '35':
+    child_frame_id: stanford_bunny_frame_optitrack
+    parent_frame_id: optitrack_frame
+    pose: stanford_bunny/pose
+    pose2d: stanford_bunny/ground_pose
+  '37':
+    child_frame_id: train_frame_optitrack
+    parent_frame_id: optitrack_frame
+    pose: train/pose
+    pose2d: train/ground_pose
+  '38':
+    child_frame_id: sphere_large_frame_optitrack
+    parent_frame_id: optitrack_frame
+    pose: sphere_large/pose
+    pose2d: sphere_large/ground_pose
+  '39':
+    child_frame_id: piggy_bank_frame_optitrack
+    parent_frame_id: optitrack_frame
+    pose: piggy_bank/pose
+    pose2d: piggy_bank/ground_pose
+  '40':
+    child_frame_id: sphere_medium_frame_optitrack
+    parent_frame_id: optitrack_frame
+    pose: sphere_medium/pose
+    pose2d: sphere_medium/ground_pose
+  '41':
+    child_frame_id: cube_small_frame_optitrack
+    parent_frame_id: optitrack_frame
+    pose: cube_small/pose
+    pose2d: cube_small/ground_pose
+  '42':
+    child_frame_id: wine_glass_frame_optitrack
+    parent_frame_id: optitrack_frame
+    pose: wine_glass/pose
+    pose2d: wine_glass/ground_pose
+  '44':
+    child_frame_id: pyramid_medium_frame_optitrack
+    parent_frame_id: optitrack_frame
+    pose: pyramid_medium/pose
+    pose2d: pyramid_medium/ground_pose
+  '45':
+    child_frame_id: sphere_small_frame_optitrack
+    parent_frame_id: optitrack_frame
+    pose: sphere_small/pose
+    pose2d: sphere_small/ground_pose
+  '46':
+    child_frame_id: airplane_frame_optitrack
+    parent_frame_id: optitrack_frame
+    pose: airplane/pose
+    pose2d: airplane/ground_pose
+  '47':
+    child_frame_id: cylinder_large_frame_optitrack
+    parent_frame_id: optitrack_frame
+    pose: cylinder_large/pose
+    pose2d: cylinder_large/ground_pose
+  '5':
+    child_frame_id: toothbrush_frame_optitrack
+    parent_frame_id: optitrack_frame
+    pose: toothbrush/pose
+    pose2d: toothbrush/ground_pose
+  '50':
+    child_frame_id: hammer_frame_optitrack
+    parent_frame_id: optitrack_frame
+    pose: hammer/pose
+    pose2d: hammer/ground_pose
+  '51':
+    child_frame_id: pan_frame_optitrack
+    parent_frame_id: optitrack_frame
+    pose: pan/pose
+    pose2d: pan/ground_pose
+  '53':
+    child_frame_id: toothpaste_frame_optitrack
+    parent_frame_id: optitrack_frame
+    pose: toothpaste/pose
+    pose2d: toothpaste/ground_pose
+  '54':
+    child_frame_id: palm_print_frame_optitrack
+    parent_frame_id: optitrack_frame
+    pose: palm_print/pose
+    pose2d: palm_print/ground_pose
+  '55':
+    child_frame_id: alarm_clock_frame_optitrack
+    parent_frame_id: optitrack_frame
+    pose: alarm_clock/pose
+    pose2d: alarm_clock/ground_pose
+  '56':
+    child_frame_id: cell_phone_frame_optitrack
+    parent_frame_id: optitrack_frame
+    pose: cell_phone/pose
+    pose2d: cell_phone/ground_pose
+  '57':
+    child_frame_id: cup_frame_optitrack
+    parent_frame_id: optitrack_frame
+    pose: cup/pose
+    pose2d: cup/ground_pose
+  '58':
+    child_frame_id: door_knob_frame_optitrack
+    parent_frame_id: optitrack_frame
+    pose: door_knob/pose
+    pose2d: door_knob/ground_pose
+  '59':
+    child_frame_id: elephant_frame_optitrack
+    parent_frame_id: optitrack_frame
+    pose: elephant/pose
+    pose2d: elephant/ground_pose
+  '6':
+    child_frame_id: camera_frame_optitrack
+    parent_frame_id: optitrack_frame
+    pose: camera/pose
+    pose2d: camera/ground_pose
+  '60':
+    child_frame_id: stapler_frame_optitrack
+    parent_frame_id: optitrack_frame
+    pose: stapler/pose
+    pose2d: stapler/ground_pose
+  '7':
+    child_frame_id: eyeglasses_frame_optitrack
+    parent_frame_id: optitrack_frame
+    pose: eyeglasses/pose
+    pose2d: eyeglasses/ground_pose
+  '8':
+    child_frame_id: cube_large_frame_optitrack
+    parent_frame_id: optitrack_frame
+    pose: cube_large/pose
+    pose2d: cube_large/ground_pose
+  '9':
+    child_frame_id: cylinder_medium_frame_optitrack
+    parent_frame_id: optitrack_frame
+    pose: cylinder_medium/pose
+    pose2d: cylinder_medium/ground_pose

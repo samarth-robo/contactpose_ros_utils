@@ -7,6 +7,7 @@
     <arg name="vis" default="true"/>
     <arg name="const_thermal_norm" default="false"/>
     <arg name="play_rate" default="0.75"/>
+    <arg name="do_texture_mapping" default="true"/>
 
     <!-- play bag file -->
     <param name="use_sim_time" value="true"/>
@@ -39,7 +40,10 @@
         <!-- texture mapping -->
         <node name="texture_mapping" pkg="contactdb_utils"
               type="texture_mapping2.py" output="screen" required="true"
-              args="--object $(arg object_name) --output ~/toothbrush.ply"
+              if="$(arg do_texture_mapping)"
+              args="
+              --object $(arg object_name)
+              --output $(arg data_dir)/$(arg p_id)/$(arg object_name)/$(arg object_name).ply"
               ns="boson">
         </node>
     </group>

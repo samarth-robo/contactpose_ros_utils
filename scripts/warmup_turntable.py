@@ -14,10 +14,10 @@ except Exception as e:
 arduino.motor_invert(True)
 arduino.motor_enable()
 arduino.motor_reset_origin()
-arduino.motor_speed(200)
-arduino.motor_acceleration(200)
+arduino.motor_speed(50)
+arduino.motor_acceleration(100)
 
-step = 40
+step = 360
 N = 5
 
 for i in xrange(N):

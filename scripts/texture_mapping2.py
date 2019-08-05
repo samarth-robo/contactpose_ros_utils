@@ -10,7 +10,6 @@ import argparse
 import sys
 import os
 import open3d
-import trimesh
 from copy import deepcopy
 from render_depth_maps import render_depth_maps
 from show_contactmap import apply_colormap
@@ -79,17 +78,17 @@ class TextureMapper:
     except CvBridgeError as e:
       rospy.logwarn(e)
       return
-    self.images.append(cv_image)
 
     # get object pose
     try:
       cTo = self.tf_buffer.lookup_transform(self.camera_frame, self.object_frame,
-        data.header.stamp, rospy.Duration(0.5))
+        data.header.stamp, rospy.Duration(1.0/20))
     except (tf2_ros.LookupException, tf2_ros.ConnectivityException,
     tf2_ros.ExtrapolationException) as e:
       rospy.logwarn(e)
       return
     self.cTos.append(tform2matrix(cTo.transform))
+    self.images.append(cv_image)
 
     # get camera intrinsics for first callback
     if self.intrinsics.K[0] == 0:
@@ -101,7 +100,7 @@ class TextureMapper:
 
   def texture_map(self, models_dir, output_filename, depth_thresh_for_visibility=1e-2,
       depth_thresh_for_discontinuity=0.035, max_vertex_normal_angle=70,
-      mesh_scale=1e-3, show_textured_mesh=True, debug_mode=False):
+      mesh_scale=1e-3, show_textured_mesh=True, debug_mode=False, n_images=20):
     # read mesh file
     mesh_filename = osp.join(models_dir, '{:s}.ply'.format(self.object_name))
     mesh = open3d.read_triangle_mesh(mesh_filename)
@@ -112,6 +111,12 @@ class TextureMapper:
     intrinsic = open3d.PinholeCameraIntrinsic(self.intrinsics.width,
       self.intrinsics.height, self.intrinsics.K[0], self.intrinsics.K[4],
       self.intrinsics.K[2], self.intrinsics.K[5])
+
+    # subsample the images
+    assert len(self.images) == len(self.cTos)
+    step = int(float(len(self.images)) / n_images)
+    self.cTos = self.cTos[::step]
+    self.images = self.images[::step]
 
     # get depth maps by rendering
     rospy.loginfo('Rendering depth maps...')
