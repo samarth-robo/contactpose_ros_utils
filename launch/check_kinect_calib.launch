@@ -1,0 +1,38 @@
+<launch>
+    <arg name="date"/>
+    <arg name="object_name"/>
+    <arg name="kinect_position"/>
+    <arg name="kinect_res" default="qhd"/>
+    <arg name="kinect_left" value="$(eval True if kinect_position == 'left' else False)"/>
+    <arg name="kinect_right" value="$(eval True if kinect_position == 'right' else False)"/>
+    <arg name="kinect_middle" value="$(eval True if kinect_position == 'middle' else False)"/>
+
+    <include file="$(find mocap_optitrack)/launch/mocap.launch">
+        <arg name="mocap_config_file"
+             value="$(find contactdb_utils)/data/mocap.yaml"/>
+    </include>
+
+    <!-- Start Kinect -->
+    <include file="$(find contactdb_utils)/launch/kinect.launch" ns="deepgrasp"
+             if="$(eval arg('kinect_left') or arg('kinect_right') or arg('kinect_middle'))">
+        <arg name="view" value="false"/>
+        <arg name="view_images_only" value="false"/>
+        <arg name="kinect_res" value="$(arg kinect_res)"/>
+        <arg name="date" value="$(arg date)"/>
+        <arg name="left" value="$(arg kinect_left)"/>
+        <arg name="right" value="$(arg kinect_right)"/>
+        <arg name="middle" value="$(arg kinect_middle)"/>
+    </include>
+
+    <node name="marker_pub" required="true" output="screen"
+          pkg="contactdb_utils" type="check_kinect_calib.py"
+          args="--object_name $(arg object_name)"/>
+
+    <node name="object_tf_publisher" pkg="contactdb_utils" output="screen"
+          type="optitrack_object_alignment_publisher.py"
+          args="--object_name $(arg object_name)" required="true"
+          if="$(eval arg('object_name') != 'none')"/>
+
+    <node name="rviz" type="rviz" pkg="rviz" output="screen" required="true"
+          args="-d $(find contact_pose)/rviz_files/hand_object_pose.rviz"/>
+</launch>

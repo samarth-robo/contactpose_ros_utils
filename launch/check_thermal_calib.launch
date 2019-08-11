@@ -1,0 +1,42 @@
+<launch>
+    <arg name="date"/>
+    <arg name="object_name"/>
+
+    <include file="$(find mocap_optitrack)/launch/mocap.launch">
+        <arg name="mocap_config_file"
+             value="$(find contactdb_utils)/data/mocap.yaml"/>
+    </include>
+
+    <group ns="deepgrasp">
+        <!-- Start Thermal Camera -->
+        <include file="$(find contactdb_utils)/launch/thermal.launch">
+            <arg name="view" value="false"/>
+        </include>
+        <!-- All the static transforms -->
+        <node name="tf_pub" pkg="contactdb_utils" type="tf_publisher.py"
+              args="--date $(arg date)" output="screen" required="true"/>
+
+        <node name="marker_projector" required="true" output="screen"
+              pkg="contactdb_utils" type="check_thermal_calib.py"
+              args="--object_name $(arg object_name)">
+            <!-- inputs -->
+            <remap from="camera_info"
+                   to="boson/camera_info"/>
+            <remap from="image_in"
+                   to="boson/image_rect"/>
+            <!-- output -->
+            <remap from="image_out"
+                   to="boson/image_rect_joints"/>
+        </node>
+
+        <node name="object_tf_publisher" pkg="contactdb_utils" output="screen"
+              type="optitrack_object_alignment_publisher.py"
+              args="--object_name $(arg object_name)" required="true"
+              if="$(eval arg('object_name') != 'none')"/>
+
+        <node name="thermal_viewer" pkg="image_view" type="image_view"
+              ns="boson" output="screen">
+            <remap from="image" to="image_rect_joints"/>
+        </node>
+    </group>
+</launch>
