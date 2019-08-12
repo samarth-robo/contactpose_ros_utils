@@ -133,11 +133,6 @@ rigid_bodies:
     parent_frame_id: optitrack_frame
     pose: cube_small/pose
     pose2d: cube_small/ground_pose
-  '42':
-    child_frame_id: wine_glass_frame_optitrack
-    parent_frame_id: optitrack_frame
-    pose: wine_glass/pose
-    pose2d: wine_glass/ground_pose
   '44':
     child_frame_id: pyramid_medium_frame_optitrack
     parent_frame_id: optitrack_frame
@@ -218,6 +213,11 @@ rigid_bodies:
     parent_frame_id: optitrack_frame
     pose: stapler/pose
     pose2d: stapler/ground_pose
+  '61':
+    child_frame_id: wine_glass_frame_optitrack
+    parent_frame_id: optitrack_frame
+    pose: wine_glass/pose
+    pose2d: wine_glass/ground_pose
   '7':
     child_frame_id: eyeglasses_frame_optitrack
     parent_frame_id: optitrack_frame

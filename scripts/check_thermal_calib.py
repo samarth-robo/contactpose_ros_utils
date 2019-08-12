@@ -14,6 +14,16 @@ import os
 osp = os.path
 
 
+def tx_quat(rotation):
+  q = np.asarray([
+    rotation.x,
+    rotation.y,
+    rotation.z,
+    rotation.w
+  ])
+  return q
+
+
 class JointProjector:
   def __init__(self, object_name, markers_dir):
     self.image_sub = rospy.Subscriber("image_in", Image, self.callback,
@@ -51,21 +61,23 @@ class JointProjector:
 
     # read transform
     try:
+      wTo1 = self.tfBuffer.lookup_transform('optitrack_frame', self.object_frame_id, img_msg.header.stamp-rospy.Duration(0.1), rospy.Duration(2))
+      wTo2 = self.tfBuffer.lookup_transform('optitrack_frame', self.object_frame_id, img_msg.header.stamp, rospy.Duration(2))
+      e1 = np.rad2deg(tx.euler_from_quaternion(tx_quat(wTo1.transform.rotation)))
+      e2 = np.rad2deg(tx.euler_from_quaternion(tx_quat(wTo2.transform.rotation)))
+      ve = (180 - np.abs(np.abs(e2-e1) - 180)) / 0.1
+      # nominal velocity about the up vector (Y axis) is 50 deg / s
+      delay = rospy.Duration(ve[1]/50.0 * 0.2)
       cTo = self.tfBuffer.lookup_transform(self.camera_frame_id,
                                            self.object_frame_id,
-                                           img_msg.header.stamp,
+                                           img_msg.header.stamp-delay,
         rospy.Duration(2))
     except (tf2_ros.LookupException, tf2_ros.ConnectivityException,
     tf2_ros.ExtrapolationException) as e:
       rospy.logerr(e)
       return
 
-    q = np.asarray([
-      cTo.transform.rotation.x,
-      cTo.transform.rotation.y,
-      cTo.transform.rotation.z,
-      cTo.transform.rotation.w
-    ])
+    q = tx_quat(cTo.transform.rotation)
     T = tx.quaternion_matrix(q)
     T[0, 3] = cTo.transform.translation.x
     T[1, 3] = cTo.transform.translation.y

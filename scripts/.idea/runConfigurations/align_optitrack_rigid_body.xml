@@ -13,7 +13,7 @@
     <option name="ADD_SOURCE_ROOTS" value="true" />
     <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
     <option name="SCRIPT_NAME" value="$PROJECT_DIR$/align_optitrack_rigid_body.py" />
-    <option name="PARAMETERS" value="--pick $USER_HOME$/dropbox/contactdb_v2/data/stl_files_notched --object toothbrush --n_markers 8" />
+    <option name="PARAMETERS" value="--pick $USER_HOME$/dropbox/contactdb_v2/data/stl_files_notched --object palm_print --n_markers 3" />
     <option name="SHOW_COMMAND_LINE" value="false" />
     <option name="EMULATE_TERMINAL" value="false" />
     <option name="MODULE_MODE" value="false" />

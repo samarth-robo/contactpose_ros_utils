@@ -6,7 +6,7 @@
     <arg name="kinect_res" default="qhd"/>
     <arg name="vis" default="true"/>
     <arg name="const_thermal_norm" default="false"/>
-    <arg name="play_rate" default="0.75"/>
+    <arg name="play_rate" default="1"/>
     <arg name="do_texture_mapping" default="true"/>
 
     <!-- play bag file -->

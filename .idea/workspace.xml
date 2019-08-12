@@ -4,46 +4,47 @@
     <generated>
       <config projectName="contactdb_utils" targetName="pcl_msgs_generate_messages_nodejs" />
       <config projectName="contactdb_utils" targetName="actionlib_msgs_generate_messages_py" />
-      <config projectName="contactdb_utils" targetName="actionlib_msgs_generate_messages_eus" />
-      <config projectName="contactdb_utils" targetName="topic_tools_generate_messages_cpp" />
-      <config projectName="contactdb_utils" targetName="bond_generate_messages_lisp" />
+      <config projectName="contactdb_utils" targetName="tf_generate_messages_lisp" />
       <config projectName="contactdb_utils" targetName="gtest_main" />
       <config projectName="contactdb_utils" targetName="thermal_camera_proc" />
       <config projectName="contactdb_utils" targetName="tests" />
       <config projectName="contactdb_utils" targetName="sensor_msgs_generate_messages_nodejs" />
-      <config projectName="contactdb_utils" targetName="roscpp_generate_messages_lisp" />
+      <config projectName="contactdb_utils" targetName="register_depth" />
       <config projectName="contactdb_utils" targetName="bond_generate_messages_cpp" />
-      <config projectName="contactdb_utils" targetName="actionlib_msgs_generate_messages_cpp" />
       <config projectName="contactdb_utils" targetName="std_srvs_generate_messages_cpp" />
-      <config projectName="contactdb_utils" targetName="tf_generate_messages_lisp" />
+      <config projectName="contactdb_utils" targetName="rosgraph_msgs_generate_messages_py" />
       <config projectName="contactdb_utils" targetName="dynamic_reconfigure_generate_messages_cpp" />
       <config projectName="contactdb_utils" targetName="tf2_msgs_generate_messages_py" />
       <config projectName="contactdb_utils" targetName="actionlib_generate_messages_nodejs" />
       <config projectName="contactdb_utils" targetName="cloud_tf_sync" />
       <config projectName="contactdb_utils" targetName="tf_generate_messages_eus" />
+      <config projectName="contactdb_utils" targetName="tf2_msgs_generate_messages_eus" />
+      <config projectName="contactdb_utils" targetName="std_srvs_generate_messages_nodejs" />
       <config projectName="contactdb_utils" targetName="topic_tools_generate_messages_eus" />
       <config projectName="contactdb_utils" targetName="actionlib_generate_messages_eus" />
       <config projectName="contactdb_utils" targetName="dynamic_reconfigure_generate_messages_py" />
-      <config projectName="contactdb_utils" targetName="std_srvs_generate_messages_nodejs" />
+      <config projectName="contactdb_utils" targetName="topic_tools_generate_messages_lisp" />
       <config projectName="contactdb_utils" targetName="clean_test_results" />
       <config projectName="contactdb_utils" targetName="dynamic_reconfigure_generate_messages_lisp" />
-      <config projectName="contactdb_utils" targetName="pcl_msgs_generate_messages_cpp" />
-      <config projectName="contactdb_utils" targetName="pcd_grabber" />
+      <config projectName="contactdb_utils" targetName="std_msgs_generate_messages_py" />
+      <config projectName="contactdb_utils" targetName="roscpp_generate_messages_py" />
       <config projectName="contactdb_utils" targetName="sensor_msgs_generate_messages_lisp" />
       <config projectName="contactdb_utils" targetName="geometry_msgs_generate_messages_cpp" />
       <config projectName="contactdb_utils" targetName="tf2_msgs_generate_messages_cpp" />
+      <config projectName="contactdb_utils" targetName="download_extra_data" />
       <config projectName="contactdb_utils" targetName="gtest" />
       <config projectName="contactdb_utils" targetName="gmock_main" />
       <config projectName="contactdb_utils" targetName="std_srvs_generate_messages_eus" />
       <config projectName="contactdb_utils" targetName="dynamic_reconfigure_generate_messages_eus" />
       <config projectName="contactdb_utils" targetName="std_srvs_generate_messages_py" />
       <config projectName="contactdb_utils" targetName="actionlib_generate_messages_py" />
-      <config projectName="contactdb_utils" targetName="gmock" />
+      <config projectName="contactdb_utils" targetName="pcl_msgs_generate_messages_eus" />
       <config projectName="contactdb_utils" targetName="nodelet_generate_messages_py" />
       <config projectName="contactdb_utils" targetName="pcl_ros_gencfg" />
       <config projectName="contactdb_utils" targetName="nodelet_generate_messages_lisp" />
       <config projectName="contactdb_utils" targetName="topic_tools_generate_messages_nodejs" />
       <config projectName="contactdb_utils" targetName="dynamic_reconfigure_gencfg" />
+      <config projectName="contactdb_utils" targetName="std_msgs_generate_messages_nodejs" />
       <config projectName="contactdb_utils" targetName="roscpp_generate_messages_cpp" />
       <config projectName="contactdb_utils" targetName="nodelet_generate_messages_cpp" />
       <config projectName="contactdb_utils" targetName="pcl_msgs_generate_messages_lisp" />
@@ -51,12 +52,11 @@
       <config projectName="contactdb_utils" targetName="std_msgs_generate_messages_cpp" />
       <config projectName="contactdb_utils" targetName="roscpp_generate_messages_eus" />
       <config projectName="contactdb_utils" targetName="geometry_msgs_generate_messages_py" />
-      <config projectName="contactdb_utils" targetName="sensor_msgs_generate_messages_py" />
-      <config projectName="contactdb_utils" targetName="geometry_msgs_generate_messages_eus" />
-      <config projectName="contactdb_utils" targetName="rosgraph_msgs_generate_messages_py" />
-      <config projectName="contactdb_utils" targetName="tf2_msgs_generate_messages_eus" />
       <config projectName="contactdb_utils" targetName="tf_generate_messages_nodejs" />
+      <config projectName="contactdb_utils" targetName="geometry_msgs_generate_messages_eus" />
+      <config projectName="contactdb_utils" targetName="bond_generate_messages_lisp" />
       <config projectName="contactdb_utils" targetName="test_mesh_sampling" />
+      <config projectName="contactdb_utils" targetName="sensor_msgs_generate_messages_py" />
       <config projectName="contactdb_utils" targetName="sensor_msgs_generate_messages_cpp" />
       <config projectName="contactdb_utils" targetName="test_texture_mapping" />
       <config projectName="contactdb_utils" targetName="tf2_msgs_generate_messages_nodejs" />
@@ -67,37 +67,37 @@
       <config projectName="contactdb_utils" targetName="geometry_msgs_generate_messages_nodejs" />
       <config projectName="contactdb_utils" targetName="nodelet_generate_messages_eus" />
       <config projectName="contactdb_utils" targetName="check_camera_poses" />
+      <config projectName="contactdb_utils" targetName="actionlib_msgs_generate_messages_eus" />
       <config projectName="contactdb_utils" targetName="geometry_msgs_generate_messages_lisp" />
       <config projectName="contactdb_utils" targetName="std_msgs_generate_messages_eus" />
       <config projectName="contactdb_utils" targetName="cloud_tf_sync_video" />
-      <config projectName="contactdb_utils" targetName="topic_tools_generate_messages_lisp" />
-      <config projectName="contactdb_utils" targetName="std_srvs_generate_messages_lisp" />
       <config projectName="contactdb_utils" targetName="bond_generate_messages_nodejs" />
-      <config projectName="contactdb_utils" targetName="pcl_msgs_generate_messages_eus" />
+      <config projectName="contactdb_utils" targetName="pcl_msgs_generate_messages_cpp" />
       <config projectName="contactdb_utils" targetName="roscpp_generate_messages_nodejs" />
       <config projectName="contactdb_utils" targetName="topic_tools_generate_messages_py" />
+      <config projectName="contactdb_utils" targetName="roscpp_generate_messages_lisp" />
       <config projectName="contactdb_utils" targetName="rosgraph_msgs_generate_messages_nodejs" />
-      <config projectName="contactdb_utils" targetName="std_msgs_generate_messages_py" />
-      <config projectName="contactdb_utils" targetName="roscpp_generate_messages_py" />
+      <config projectName="contactdb_utils" targetName="gmock" />
+      <config projectName="contactdb_utils" targetName="std_srvs_generate_messages_lisp" />
       <config projectName="contactdb_utils" targetName="sensor_msgs_generate_messages_eus" />
-      <config projectName="contactdb_utils" targetName="run_tests" />
+      <config projectName="contactdb_utils" targetName="actionlib_msgs_generate_messages_cpp" />
       <config projectName="contactdb_utils" targetName="tf_generate_messages_py" />
-      <config projectName="contactdb_utils" targetName="tf2_msgs_generate_messages_lisp" />
       <config projectName="contactdb_utils" targetName="nodelet_generate_messages_nodejs" />
+      <config projectName="contactdb_utils" targetName="actionlib_generate_messages_cpp" />
       <config projectName="contactdb_utils" targetName="bond_generate_messages_eus" />
+      <config projectName="contactdb_utils" targetName="actionlib_generate_messages_lisp" />
       <config projectName="contactdb_utils" targetName="rosgraph_msgs_generate_messages_cpp" />
       <config projectName="contactdb_utils" targetName="actionlib_msgs_generate_messages_nodejs" />
-      <config projectName="contactdb_utils" targetName="register_depth" />
       <config projectName="contactdb_utils" targetName="pcl_msgs_generate_messages_py" />
       <config projectName="contactdb_utils" targetName="std_msgs_generate_messages_lisp" />
       <config projectName="contactdb_utils" targetName="actionlib_msgs_generate_messages_lisp" />
       <config projectName="contactdb_utils" targetName="rosgraph_msgs_generate_messages_eus" />
-      <config projectName="contactdb_utils" targetName="std_msgs_generate_messages_nodejs" />
+      <config projectName="contactdb_utils" targetName="topic_tools_generate_messages_cpp" />
       <config projectName="contactdb_utils" targetName="rosgraph_msgs_generate_messages_lisp" />
-      <config projectName="contactdb_utils" targetName="actionlib_generate_messages_cpp" />
+      <config projectName="contactdb_utils" targetName="tf2_msgs_generate_messages_lisp" />
       <config projectName="contactdb_utils" targetName="tf_generate_messages_cpp" />
-      <config projectName="contactdb_utils" targetName="actionlib_generate_messages_lisp" />
-      <config projectName="contactdb_utils" targetName="download_extra_data" />
+      <config projectName="contactdb_utils" targetName="run_tests" />
+      <config projectName="contactdb_utils" targetName="pcd_grabber" />
     </generated>
   </component>
   <component name="CMakeSettings">
@@ -109,17 +109,18 @@
   <component name="ChangeListManager">
     <list default="true" id="f1596990-c9b3-4f2a-988d-8ada1ad3b600" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/calibrations/intrinsics/kinects/001329665147/calib_pose.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/calibrations/intrinsics/kinects/001329665147/calib_pose.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/calibrations/intrinsics/kinects/004279661647/calib_color.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/calibrations/intrinsics/kinects/004279661647/calib_color.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/calibrations/intrinsics/kinects/001329665147/calib_depth.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/calibrations/intrinsics/kinects/001329665147/calib_depth.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/calibrations/intrinsics/kinects/004279661647/calib_depth.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/calibrations/intrinsics/kinects/004279661647/calib_depth.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/calibrations/intrinsics/kinects/004279661647/calib_ir.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/calibrations/intrinsics/kinects/004279661647/calib_ir.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/calibrations/intrinsics/kinects/004279661647/calib_pose.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/calibrations/intrinsics/kinects/004279661647/calib_pose.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/calibrations/intrinsics/kinects/022402465047/calib_pose.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/calibrations/intrinsics/kinects/022402465047/calib_pose.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/calibrations/intrinsics/kinects/022402465047/calib_depth.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/calibrations/intrinsics/kinects/022402465047/calib_depth.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/mocap.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/data/mocap.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/launch/texture_mapping.launch" beforeDir="false" afterPath="$PROJECT_DIR$/launch/texture_mapping.launch" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/launch/thermal.launch" beforeDir="false" afterPath="$PROJECT_DIR$/launch/thermal.launch" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/.idea/runConfigurations/align_optitrack_rigid_body.xml" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/.idea/runConfigurations/align_optitrack_rigid_body.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/.idea/runConfigurations/convert_calibration.xml" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/.idea/runConfigurations/convert_calibration.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/.idea/runConfigurations/embed_marker_points.xml" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/.idea/runConfigurations/embed_marker_points.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/.idea/runConfigurations/texture_mapping.xml" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/.idea/runConfigurations/texture_mapping.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/convert_calibration.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/convert_calibration.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/check_thermal_calib.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/check_thermal_calib.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/texture_mapping2.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/texture_mapping2.py" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/../clion_builds/contactdb_utils_v2/cmake-build-debug/" />
@@ -184,8 +185,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/data/mocap.yaml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="432">
-              <caret line="24" selection-start-line="24" selection-end-line="24" />
+            <state relative-caret-position="4230">
+              <caret line="235" selection-start-line="235" selection-end-line="235" />
             </state>
           </provider>
         </entry>
@@ -193,17 +194,34 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/launch/thermal.launch">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="450">
-              <caret line="25" column="53" selection-start-line="25" selection-start-column="53" selection-end-line="25" selection-end-column="53" />
+            <state relative-caret-position="378">
+              <caret line="21" column="29" selection-start-line="21" selection-start-column="29" selection-end-line="21" selection-end-column="29" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/thermal_camera_proc.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="558">
+              <caret line="31" column="36" selection-start-line="31" selection-start-column="36" selection-end-line="31" selection-end-column="36" />
+              <folding>
+                <element signature="e#0#48#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/thermal_camera_node.cpp">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/launch/thermal_proc.launch">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="15" column="11" selection-start-line="15" selection-start-column="11" selection-end-line="15" selection-end-column="11" />
+            <state relative-caret-position="360">
+              <caret line="20" selection-start-line="20" selection-end-line="20" />
             </state>
           </provider>
         </entry>
@@ -220,24 +238,48 @@
         <option value="$PROJECT_DIR$/src/thermal_camera_proc.cpp" />
         <option value="$PROJECT_DIR$/launch/contactdb_cameras.launch" />
         <option value="$PROJECT_DIR$/launch/pointcloud.launch" />
-        <option value="$PROJECT_DIR$/launch/thermal.launch" />
         <option value="$PROJECT_DIR$/launch/record_object.launch" />
         <option value="$PROJECT_DIR$/data/mocap.yaml" />
         <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/launch/thermal.launch" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="3230" />
-    <option name="y" value="-4" />
-    <option name="width" value="2560" />
-    <option name="height" value="1604" />
+    <option name="x" value="-1" />
+    <option name="y" value="-11" />
+    <option name="width" value="2562" />
+    <option name="height" value="1612" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
-    <panes />
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="contactdb_utils" type="b2602c69:ProjectViewProjectNode" />
+              <item name="contactdb_utils_v2" type="47feb1d3:ProjectViewModuleNode" />
+            </path>
+            <path>
+              <item name="contactdb_utils" type="b2602c69:ProjectViewProjectNode" />
+              <item name="contactdb_utils_v2" type="47feb1d3:ProjectViewModuleNode" />
+              <item name="contactdb_utils_v2" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="contactdb_utils" type="b2602c69:ProjectViewProjectNode" />
+              <item name="contactdb_utils_v2" type="47feb1d3:ProjectViewModuleNode" />
+              <item name="contactdb_utils_v2" type="462c0819:PsiDirectoryNode" />
+              <item name="launch" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
@@ -846,20 +888,22 @@
       <updated>1563563522299</updated>
       <workItem from="1563563524982" duration="9000" />
       <workItem from="1563851317441" duration="9000" />
+      <workItem from="1565560994399" duration="1000" />
+      <workItem from="1565561009261" duration="1889000" />
+      <workItem from="1565631998634" duration="319000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="10014000" />
+    <option name="totallyTimeSpent" value="12223000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="2559" y="-11" width="2562" height="1612" extended-state="6" />
+    <frame x="-2561" y="-11" width="2562" height="1612" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" weight="0.1487669" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.14996022" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="CMake" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32978016" />
@@ -874,6 +918,7 @@
       <window_info anchor="bottom" id="Python Console" order="11" />
       <window_info anchor="bottom" id="Event Log" order="12" side_tool="true" />
       <window_info anchor="bottom" id="Messages" order="13" weight="0.32978016" />
+      <window_info anchor="bottom" id="CMake" order="14" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -900,16 +945,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="396">
           <caret line="26" column="9" selection-start-line="26" selection-start-column="9" selection-end-line="26" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/thermal_camera_proc.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="67" column="4" selection-start-line="67" selection-start-column="4" selection-end-line="67" selection-end-column="4" />
-          <folding>
-            <element signature="e#0#48#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -967,22 +1002,35 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/data/mocap.yaml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
-          <caret line="24" selection-start-line="24" selection-end-line="24" />
+        <state relative-caret-position="4230">
+          <caret line="235" selection-start-line="235" selection-end-line="235" />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/thermal_camera_proc.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="558">
+          <caret line="31" column="36" selection-start-line="31" selection-start-column="36" selection-end-line="31" selection-end-column="36" />
+          <folding>
+            <element signature="e#0#48#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/thermal_camera_node.cpp">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/launch/thermal_proc.launch">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="15" column="11" selection-start-line="15" selection-start-column="11" selection-end-line="15" selection-end-column="11" />
+        <state relative-caret-position="360">
+          <caret line="20" selection-start-line="20" selection-end-line="20" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/launch/thermal.launch">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="25" column="53" selection-start-line="25" selection-start-column="53" selection-end-line="25" selection-end-column="53" />
+        <state relative-caret-position="378">
+          <caret line="21" column="29" selection-start-line="21" selection-start-column="29" selection-end-line="21" selection-end-column="29" />
         </state>
       </provider>
     </entry>

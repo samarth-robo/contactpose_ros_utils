@@ -19,6 +19,7 @@
     <param name="cv_cap_prop_fourcc" value="540422489"/>
     <param name="cv_cap_prop_convert_rgb" value="0"/>
     <param name="cv_cap_prop_fps" value="60"/>
+    <param name="cv_cap_prop_buffersize" value="1"/>
   </node>
 
   <include file="$(find contactdb_utils)/launch/thermal_proc.launch"

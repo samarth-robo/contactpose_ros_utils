@@ -13,6 +13,7 @@ import open3d
 from copy import deepcopy
 from render_depth_maps import render_depth_maps
 from show_contactmap import apply_colormap
+from check_thermal_calib import tx_quat
 
 osp = os.path
 
@@ -42,12 +43,12 @@ class TextureMapper:
     self.object_name = object_name
     self.camera_frame = 'boson_frame'
     self.object_frame = '{:s}_frame'.format(object_name)
-    self.tf_buffer = tf2_ros.Buffer()
+    self.tf_buffer = tf2_ros.Buffer(cache_time=rospy.Duration(5))
     self.tf_listener = tf2_ros.TransformListener(self.tf_buffer)
 
     self.cv_bridge = CvBridge()
     self.im_sub = rospy.Subscriber("image_rect", Image, self.image_cb,
-      queue_size=100)
+      queue_size=1, buff_size=2**24)
 
     self.intrinsics = CameraInfo()
     self.images = []
@@ -81,8 +82,21 @@ class TextureMapper:
 
     # get object pose
     try:
+      wTo1 = self.tf_buffer.lookup_transform('optitrack_frame', self.object_frame, data.header.stamp-rospy.Duration(0.1), rospy.Duration(2))
+      wTo2 = self.tf_buffer.lookup_transform('optitrack_frame', self.object_frame, data.header.stamp, rospy.Duration(2))
+      e1 = np.rad2deg(tx.euler_from_quaternion(tx_quat(wTo1.transform.rotation)))
+      e2 = np.rad2deg(tx.euler_from_quaternion(tx_quat(wTo2.transform.rotation)))
+      ve = (180 - np.abs(np.abs(e2-e1) - 180)) / 0.1
+      # nominal velocity about the up vector (Y axis) is 50 deg / s
+      delay = rospy.Duration(ve[1]/50.0 * 0.2)
+    except (tf2_ros.LookupException, tf2_ros.ConnectivityException,
+    tf2_ros.ExtrapolationException) as e:
+      rospy.logwarn(e)
+      delay = rospy.Duration(0)
+
+    try:
       cTo = self.tf_buffer.lookup_transform(self.camera_frame, self.object_frame,
-        data.header.stamp, rospy.Duration(1.0/20))
+        data.header.stamp-delay, rospy.Duration(2))
     except (tf2_ros.LookupException, tf2_ros.ConnectivityException,
     tf2_ros.ExtrapolationException) as e:
       rospy.logwarn(e)
@@ -114,6 +128,9 @@ class TextureMapper:
 
     # subsample the images
     assert len(self.images) == len(self.cTos)
+    if len(self.images) == 0:
+      rospy.logerr('Did not collect any thermal images')
+      return
     step = int(float(len(self.images)) / n_images)
     self.cTos = self.cTos[::step]
     self.images = self.images[::step]
@@ -162,7 +179,8 @@ class TextureMapper:
 if __name__ == '__main__':
   parser = argparse.ArgumentParser()
   parser.add_argument('--object_name', required=True)
-  parser.add_argument('--output_filename', default='texture_map.py')
+  parser.add_argument('--output_filename', default='texture_map.ply')
+  parser.add_argument('--debug', action='store_true')
   parser.add_argument('--models_dir',
     default='~/dropbox/contactdb_v2/data/ply_files_mm')
   parser.add_argument('--visibility_thresh', type=float, default=1e-2)
@@ -188,6 +206,5 @@ if __name__ == '__main__':
     osp.expanduser(args.output_filename),
     depth_thresh_for_visibility=args.visibility_thresh,
     depth_thresh_for_discontinuity=args.discontinuity_thresh,
-    max_vertex_normal_angle=args.vertex_normal_angle)
-
-  print('here')
+    max_vertex_normal_angle=args.vertex_normal_angle,
+    debug_mode=args.debug)
