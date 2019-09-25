@@ -89,7 +89,7 @@ def json2camera(camera_data):
   return camera
 
 
-def convert(input_dir, date):
+def convert(input_dir, date, extrinsics_only=False):
   input_dir = osp.join(input_dir)
 
   serials_filename = osp.join('..', 'calibrations', 'kinect_serial_numbers.txt')
@@ -105,64 +105,65 @@ def convert(input_dir, date):
     os.makedirs(extrinsics_output_dir)
 
   for kinect_name, serial in name2serial.items():
-    # intrinsics
-    intrinsics_output_dir = osp.join('..', 'calibrations', 'intrinsics', 'kinects',
-      serial)
-    if not osp.isdir(intrinsics_output_dir):
-      os.makedirs(intrinsics_output_dir)
+    if not extrinsics_only:
+      # intrinsics
+      intrinsics_output_dir = osp.join('..', 'calibrations', 'intrinsics', 'kinects',
+        serial)
+      if not osp.isdir(intrinsics_output_dir):
+        os.makedirs(intrinsics_output_dir)
 
-    json_filename = osp.join(input_dir, 'intrinsics',
-                             'kinect_{:s}.json'.format(kinect_name))
-    try:
-      with open(json_filename, 'r') as f:
-        data = json.load(f)
-    except IOError:
-      print('skipping {:s}'.format(kinect_name))
-      continue
+      json_filename = osp.join(input_dir, 'intrinsics',
+                              'kinect_{:s}.json'.format(kinect_name))
+      try:
+        with open(json_filename, 'r') as f:
+          data = json.load(f)
+      except IOError:
+        print('skipping {:s}'.format(kinect_name))
+        continue
 
-    # read the JSON file
-    camera_rgb = Camera()
-    camera_ir = Camera()
-    for camera_data in data:
-      camera = json2camera(camera_data)
-      if 'color' in camera.serial:
-        camera_rgb = deepcopy(camera)
-        # iai_kinect2 expects matrix for HD image size
-        camera_rgb.K[0, 0] *= 2.0
-        camera_rgb.K[1, 1] *= 2.0
-        camera_rgb.K[0, 2] *= 2.0
-        camera_rgb.K[1, 2] *= 2.0
-      else:
-        camera_ir = deepcopy(camera)
+      # read the JSON file
+      camera_rgb = Camera()
+      camera_ir = Camera()
+      for camera_data in data:
+        camera = json2camera(camera_data)
+        if 'color' in camera.serial:
+          camera_rgb = deepcopy(camera)
+          # iai_kinect2 expects matrix for HD image size
+          camera_rgb.K[0, 0] *= 2.0
+          camera_rgb.K[1, 1] *= 2.0
+          camera_rgb.K[0, 2] *= 2.0
+          camera_rgb.K[1, 2] *= 2.0
+        else:
+          camera_ir = deepcopy(camera)
 
-    # output color YAML file
-    filename = osp.join(intrinsics_output_dir, 'calib_color.yaml')
-    camera_rgb.write(filename)
+      # output color YAML file
+      filename = osp.join(intrinsics_output_dir, 'calib_color.yaml')
+      camera_rgb.write(filename)
 
-    # output IR YAML file
-    filename = osp.join(intrinsics_output_dir, 'calib_ir.yaml')
-    camera_ir.write(filename)
+      # output IR YAML file
+      filename = osp.join(intrinsics_output_dir, 'calib_ir.yaml')
+      camera_ir.write(filename)
 
-    # output pose calibration file file
-    T = np.dot(camera_rgb.cTw, np.linalg.inv(camera_ir.cTw))
-    R = T[:3, :3]
-    trans = T[:3, 3] / 1000.0
-    trans_skew = np.asarray([
-      [0, -trans[2], trans[1]],
-      [trans[2], 0, -trans[0]],
-      [-trans[1], trans[0], 0]
-    ])
-    E = np.dot(trans_skew, R)
-    F = np.dot(np.dot(np.linalg.inv(camera_rgb.K), E), camera_ir.K)
-    F /= F[2 , 2]
-    filename = osp.join(intrinsics_output_dir, 'calib_pose.yaml')
-    f = cv2.FileStorage(filename, cv2.FileStorage_WRITE)
-    f.write('rotation', R)
-    f.write('translation', trans)
-    f.write('essential', E)
-    f.write('fundamental', F)
-    f.release()
-    print('{:s} written.'.format(filename))
+      # output pose calibration file
+      T = np.dot(camera_rgb.cTw, np.linalg.inv(camera_ir.cTw))
+      R = T[:3, :3]
+      trans = T[:3, 3] / 1000.0
+      trans_skew = np.asarray([
+        [0, -trans[2], trans[1]],
+        [trans[2], 0, -trans[0]],
+        [-trans[1], trans[0], 0]
+      ])
+      E = np.dot(trans_skew, R)
+      F = np.dot(np.dot(np.linalg.inv(camera_rgb.K), E), camera_ir.K)
+      F /= F[2 , 2]
+      filename = osp.join(intrinsics_output_dir, 'calib_pose.yaml')
+      f = cv2.FileStorage(filename, cv2.FileStorage_WRITE)
+      f.write('rotation', R)
+      f.write('translation', trans)
+      f.write('essential', E)
+      f.write('fundamental', F)
+      f.release()
+      print('{:s} written.'.format(filename))
 
     json_filename = osp.join(input_dir, 'extrinsics', date,
                              'kinect_{:s}_optitrack.json'.format(kinect_name))
@@ -173,8 +174,9 @@ def convert(input_dir, date):
       print('Kinect {:s} is not calibrated against Optitrack, using image-based'
             'depth offset')
       # Use the depth offset from image-based calibration
-      filename = osp.join(intrinsics_output_dir, 'calib_depth.yaml')
-      camera_ir.write_depth(filename)
+      if not extrinsics_only:
+        filename = osp.join(intrinsics_output_dir, 'calib_depth.yaml')
+        camera_ir.write_depth(filename)
       continue
 
     for camera_data in data:
@@ -184,13 +186,15 @@ def convert(input_dir, date):
                             'kinect_{:s}.txt'.format(kinect_name))
         np.savetxt(filename, camera.cTw)
         print('{:s} written.'.format(filename))
-      elif 'depth' in camera.serial:  # output depth calibration file
+      elif 'depth' in camera.serial and not extrinsics_only:  # output depth calibration file
         filename = osp.join(intrinsics_output_dir, 'calib_depth.yaml')
         camera.write_depth(filename)
 
   # Thermal camera files
   # for thermal camera, the extrinsics calibration also refines intrinsics,
-  # so we take intrinsics from the extrinsics file
+  # for 2019-07-23 so we take intrinsics from the extrinsics file
+  # extrinsics does not refine intrinsics for all other dates, so the 
+  # following step does not do anything
   json_filename = osp.join(input_dir, 'extrinsics', date, 'boson_optitrack.json')
   try:
     with open(json_filename, 'r') as f:
@@ -199,11 +203,12 @@ def convert(input_dir, date):
     print('Could not find Boson extrinsics file {:s}'.format(json_filename))
   camera = json2camera(data[0])
   # write intrinsics
-  filename = 'package://contactdb_utils/calibrations/intrinsics/boson.yaml'
-  if camera.write_cinfo(filename, 'boson_frame', 'boson'):
-    print("{:s} written".format(filename))
-  else:
-    print('Could not write {:s}'.format(filename))
+  if not extrinsics_only:
+    filename = 'package://contactdb_utils/calibrations/intrinsics/boson.yaml'
+    if camera.write_cinfo(filename, 'boson_frame', 'boson'):
+      print("{:s} written".format(filename))
+    else:
+      print('Could not write {:s}'.format(filename))
   # write extrinsics
   filename = osp.join(extrinsics_output_dir, 'boson.txt')
   np.savetxt(filename, camera.cTw)
@@ -214,6 +219,7 @@ if __name__ == '__main__':
   parser = argparse.ArgumentParser()
   parser.add_argument('--input_dir', required=True)
   parser.add_argument('--date', required=True)
+  parser.add_argument('--extrinsics_only', action='store_true')
 
   args = parser.parse_args()
-  convert(args.input_dir, args.date)
+  convert(args.input_dir, args.date, args.extrinsics_only)

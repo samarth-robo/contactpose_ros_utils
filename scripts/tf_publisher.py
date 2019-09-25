@@ -36,7 +36,7 @@ def get_tform(R, T, parent_frame, child_frame):
 
 if __name__ == '__main__':
   parser = argparse.ArgumentParser()
-  parser.add_argument('--date', required=True)
+  parser.add_argument('--p_id', required=True)
 
   rospy.init_node('contactdb_tf_broadcaster')
   rospack = rospkg.RosPack()
@@ -51,7 +51,17 @@ if __name__ == '__main__':
       name, serial = line.strip().split(" ")
       name2serial[name] = serial
 
-  calib_dir = osp.join(calib_dir, 'extrinsics', args.date)
+  # get date of the calibration
+  filename = osp.join(rospack.get_path(package_name), 'data', 'calib_dates.txt')
+  with open(filename, 'r') as f:
+    pid2date = {}
+    for line in f:
+      p_id, date = line.strip().split()
+      pid2date[p_id] = date  
+  date = pid2date[args.p_id.split('_')[0]]
+  rospy.loginfo('Publishing static TFs from date {:s}'.format(date))
+
+  calib_dir = osp.join(calib_dir, 'extrinsics', date)
   tforms = []
   for kinect_name, serial in name2serial.items():
     k_T_w = np.loadtxt(osp.join(calib_dir,
