@@ -12,7 +12,6 @@ find_package(catkin REQUIRED COMPONENTS
         message_filters
         pcl_ros
         pcl_conversions
-        kinect2_registration
         std_msgs
         sensor_msgs
 )
@@ -147,7 +146,6 @@ add_executable(test_texture_mapping src/test_texture_mapping.cpp)
 add_executable(cloud_tf_sync src/cloud_tf_sync.cpp)
 add_executable(cloud_tf_sync_video src/cloud_tf_sync_video.cpp)
 add_executable(check_camera_poses src/check_camera_poses.cpp)
-add_executable(register_depth src/register_depth.cpp src/register_depth.h)
 
 ## Add cmake target dependencies of the executable
 ## same as for the library above
@@ -161,7 +159,6 @@ target_link_libraries(test_mesh_sampling deepgrasp_common)
 target_link_libraries(cloud_tf_sync ${catkin_LIBRARIES})
 target_link_libraries(cloud_tf_sync_video ${catkin_LIBRARIES})
 target_link_libraries(check_camera_poses deepgrasp_common)
-target_link_libraries(register_depth ${catkin_LIBRARIES})
 #############
 ## Install ##
 #############
