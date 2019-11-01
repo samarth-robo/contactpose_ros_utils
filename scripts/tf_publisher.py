@@ -34,6 +34,12 @@ def get_tform(R, T, parent_frame, child_frame):
   return tform
 
 
+wrongly_clicked_objects = {
+  'full1_use': [('knife', 'LargeA2Saruco')],
+  'full1_handoff': [('knife', 'LargeA2Saruco')],
+}
+
+
 if __name__ == '__main__':
   parser = argparse.ArgumentParser()
   parser.add_argument('--p_id', required=True)
@@ -84,6 +90,13 @@ if __name__ == '__main__':
   rviz_tform = get_tform(tx.euler_matrix(np.pi/2.0, 0, 0)[:3, :3], np.zeros(3),
                          'rviz_frame', 'optitrack_frame')
   tforms.append(rviz_tform)
+
+  # wrongly clicked objects
+  if args.p_id in wrongly_clicked_objects:
+    for src_object, dst_object in wrongly_clicked_objects[args.p_id]:
+      tform = get_tform(np.eye(3), np.zeros(3), '{:s}_frame_optitrack'.format(dst_object),
+          '{:s}_frame_optitrack'.format(src_object))
+      tforms.append(tform)
 
   # send
   broadcaster = tf2_ros.StaticTransformBroadcaster()
