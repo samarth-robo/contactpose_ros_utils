@@ -37,6 +37,8 @@ def get_tform(R, T, parent_frame, child_frame):
 wrongly_clicked_objects = {
   'full1_use': [('knife', 'LargeA2Saruco')],
   'full1_handoff': [('knife', 'LargeA2Saruco')],
+  'full5_use': [('cell_phone', 'camera')],
+  'full11_use': [('toothbrush', 'toothpaste')],
 }
 
 
