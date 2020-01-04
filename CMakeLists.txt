@@ -10,8 +10,6 @@ find_package(catkin REQUIRED COMPONENTS
         camera_info_manager
         cv_bridge
         message_filters
-        pcl_ros
-        pcl_conversions
         std_msgs
         sensor_msgs
 )
@@ -127,7 +125,6 @@ include_directories(
 # add_definitions(${PCL_DEFINITIONS})
 
 ## Declare a C++ library
-add_library(deepgrasp_common src/common.cpp src/Vis.cpp)
 
 ## Add cmake target dependencies of the library
 ## as an example, code may need to be generated before libraries
@@ -139,26 +136,11 @@ add_executable(thermal_camera_proc
         src/thermal_camera_node.cpp
         src/thermal_camera_proc.cpp
         include/deepgrasp_utils/thermal_camera_proc.h)
-add_executable(pcd_grabber src/pcd_grabber.cpp)
-
-add_executable(test_mesh_sampling src/test_mesh_sampling.cpp)
-add_executable(test_texture_mapping src/test_texture_mapping.cpp)
-add_executable(cloud_tf_sync src/cloud_tf_sync.cpp)
-add_executable(cloud_tf_sync_video src/cloud_tf_sync_video.cpp)
-add_executable(check_camera_poses src/check_camera_poses.cpp)
 
 ## Add cmake target dependencies of the executable
 ## same as for the library above
 ## Specify libraries to link a library or executable target against
 target_link_libraries(thermal_camera_proc ${catkin_LIBRARIES} ${OpenCV_LIBRARIES})
-target_link_libraries(pcd_grabber ${catkin_LIBRARIES} ${OpenCV_LIBRARIES})
-target_link_libraries(test_texture_mapping ${catkin_LIBRARIES})
-
-target_link_libraries(deepgrasp_common ${catkin_LIBRARIES})
-target_link_libraries(test_mesh_sampling deepgrasp_common)
-target_link_libraries(cloud_tf_sync ${catkin_LIBRARIES})
-target_link_libraries(cloud_tf_sync_video ${catkin_LIBRARIES})
-target_link_libraries(check_camera_poses deepgrasp_common)
 #############
 ## Install ##
 #############
