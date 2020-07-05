@@ -120,12 +120,18 @@ def embed(input_filename, output_dir, marker_diameter_mm, recut):
   else:
     # read points
     points_filename = input_filename.split('/')[-1]
+    # points_filename = points_filename.replace('.stl', '_all_marker_locations.txt')
     points_filename = points_filename.replace('.stl', '_marker_locations.txt')
     points_filename = osp.join(output_dir, points_filename)
     d = np.loadtxt(points_filename, delimiter=',')
     if d.ndim == 1:
       d = d[np.newaxis, :]
-    pts, normals = d[:, :3], d[:, 3:]
+    if d.shape[1] == 3:   # all_marker_locations
+      pts = d
+      _, face_idxs, _ = pymesh.distance_to_mesh(input_mesh, pts)
+      normals = np.asarray(mesh_o3d.triangle_normals)[face_idxs]
+    elif d.shape[1] == 6:  # marker_locations
+      pts, normals = d[:, :3], d[:, 3:]
 
   # transform intruders to their appropriate locations on the object surface
   intruders_o3d = []

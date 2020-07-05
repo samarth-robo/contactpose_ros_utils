@@ -8,6 +8,7 @@
 
       <node name="thermal_proc" pkg="contactdb_utils" type="thermal_camera_proc"
             output="screen" required="true" unless="$(arg old)" args="
+            invert $(arg invert)
             agc_border $(arg agc_border)
             cold_temp $(arg cold_temp)
             const_norm $(arg const_norm)">
