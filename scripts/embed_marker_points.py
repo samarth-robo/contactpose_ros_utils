@@ -105,12 +105,16 @@ def create_intruder(marker_diameter_mm):
 
 def process_marker_locations(mesh_o3d, mesh_pymesh, markers):
   """
-  makes marker locations flush to object surface
+  snaps marker locations to object surface
   and computes surface normals at marker locations
   """
-  dist2, face_idxs, _ = pymesh.distance_to_mesh(mesh_pymesh, markers)
+  dist2, face_idxs, nbrs = pymesh.distance_to_mesh(mesh_pymesh, markers)
   normals = np.asarray(mesh_o3d.triangle_normals)[face_idxs]
-  markers -= np.sqrt(dist2) * normals
+  
+  # snap to surface
+  vs = markers - nbrs
+  vs /= np.linalg.norm(vs, axis=1, keepdims=True)
+  markers -= np.sqrt(dist2)[:, np.newaxis] * vs
   return markers, normals
 
 
@@ -134,9 +138,10 @@ def embed(input_filename, output_dir, marker_diameter_mm, recut):
     points_filename = input_filename.split('/')[-1]
     points_filename = points_filename.replace('.stl', '_marker_locations.txt')
     points_filename = osp.join(output_dir, points_filename)
-    d = np.loadtxt(points_filename, delimiter=',')
+    d = np.loadtxt(points_filename, delimiter=' ')
     if d.ndim == 1:
       d = d[np.newaxis, :]
+    d *= 1000.0
     pts, normals = process_marker_locations(mesh_o3d, input_mesh, d[:, :3])
 
   # transform intruders to their appropriate locations on the object surface
@@ -160,14 +165,15 @@ def embed(input_filename, output_dir, marker_diameter_mm, recut):
         operation='difference', engine='auto')
 
   output_mesh_o3d = pymesh2o3d(output_mesh)
+  # show
   # o3dv.draw_geometries(intruders_o3d + [mesh_o3d])
-  o3dv.draw_geometries([output_mesh_o3d])
+  # o3dv.draw_geometries([output_mesh_o3d])
 
   # save points and normals
   output_filename = osp.join(output_dir,
-      '{:s}_marker_locations.txt'.format(object_name))
+      '{:s}_final_marker_locations.txt'.format(object_name))
   header = 'px,py,pz,nx,ny,nz'
-  np.savetxt(output_filename, np.hstack((pts, normals)), delimiter=',',
+  np.savetxt(output_filename, np.hstack((pts/1000.0, normals)), delimiter=' ',
       header=header)
   print('{:s} written'.format(output_filename))
 

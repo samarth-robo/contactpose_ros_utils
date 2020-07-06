@@ -18,8 +18,8 @@ def show(object_name, data_dir):
   v = np.asarray(mesh.vertices)
 
   oXs = np.loadtxt(osp.join(data_dir,
-    '{:s}_all_marker_locations.txt'.format(object_name)))
-  oXs *= 1000
+    '{:s}_final_marker_locations.txt'.format(object_name)))
+  oXs = oXs[:, :3] * 1000.0
   markers = []
   for oX in oXs:
     m = o3dg.TriangleMesh.create_sphere(radius=0.5)
