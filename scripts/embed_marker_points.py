@@ -5,6 +5,7 @@ import argparse
 import numpy as np
 from copy import deepcopy
 import transforms3d as xforms
+from IPython.core.debugger import set_trace
 
 osp = os.path
 o3dg = o3d.geometry

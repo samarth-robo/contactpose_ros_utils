@@ -16,8 +16,6 @@ def show(object_name, data_dir):
   mesh.compute_vertex_normals()
   mesh.paint_uniform_color([0, 1, 1])
   v = np.asarray(mesh.vertices)
-  print(v.max(0))
-  print(v.min(0))
 
   oXs = np.loadtxt(osp.join(data_dir,
     '{:s}_all_marker_locations.txt'.format(object_name)))
