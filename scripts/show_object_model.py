@@ -12,6 +12,7 @@ o3dio = o3d.io
 
 def show(object_name, data_dir):
   mesh_filename = osp.join(data_dir, '{:s}.stl'.format(object_name))
+  # mesh_filename = mesh_filename.replace('notched', 'notched_old')
   mesh = o3dio.read_triangle_mesh(mesh_filename)
   mesh.compute_vertex_normals()
   mesh.paint_uniform_color([0, 1, 1])

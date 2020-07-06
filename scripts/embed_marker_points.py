@@ -94,6 +94,8 @@ def pymesh2o3d(input_mesh):
 def create_intruder(marker_diameter_mm):
   cyl_height = 10
   marker_depth_mm = np.ceil(marker_diameter_mm / 2.0)
+  # uncomment the following line if the model is too thin
+  # marker_depth_mm = 1.0
   # 0.5 mm added as tolerance for 3D printing
   cyl = o3dg.TriangleMesh.create_cylinder((marker_diameter_mm+0.5)/2.0, cyl_height)
   cyl.compute_vertex_normals()
@@ -161,6 +163,7 @@ def embed(input_filename, output_dir, marker_diameter_mm, recut):
     # perform boolean operation to remove the intersecting part of the intruder 
     # from the object mesh
     # change the engine in case it doesn't work
+    # engined mentioned in https://docs.google.com/spreadsheets/d/1C6fW5oBFApvP2pk8omErZzbz7K9zxCHA2FiUu7IqgDg/edit?usp=sharing
     output_mesh = pymesh.boolean(output_mesh, intruder_pymesh,
         operation='difference', engine='auto')
 
