@@ -22,7 +22,7 @@
     <param name="cv_cap_prop_buffersize" value="1"/>
   </node>
 
-  <include file="$(find contactdb_utils)/launch/thermal_proc.launch"
+  <include file="$(find contactpose_ros_utils)/launch/thermal_proc.launch"
            ns="$(arg camera_name)">
     <arg name="const_norm" value="$(arg const_norm)"/>
   </include>
