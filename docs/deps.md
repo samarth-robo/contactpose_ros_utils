@@ -8,6 +8,7 @@
 6. Set up the following repositories in your `catkin_ws/src`:
 - https://github.com/ros-perception/camera_info_manager_py
 - https://github.com/samarth-robo/mocap_optitrack
+- https://github.com/samarth-robo/cv_camera: My fork of the `cv_camera` ROS package with FLIR thermal camera support
 
 Check that `#include <pcl/registration/boost.h>` is included in PCL's header file `ROOT/registration/warp_point_rigid.h`.
 
