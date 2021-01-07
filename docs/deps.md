@@ -9,6 +9,7 @@
 - https://github.com/ros-perception/camera_info_manager_py
 - https://github.com/samarth-robo/mocap_optitrack
 - https://github.com/samarth-robo/cv_camera: My fork of the `cv_camera` ROS package with FLIR thermal camera support
+- https://github.com/samarth-robo/ROS_Boson: ROS services for performing actions on the FLIR Boson camera (mainly used for flat-field correction before every recording)
 
 Check that `#include <pcl/registration/boost.h>` is included in PCL's header file `ROOT/registration/warp_point_rigid.h`.
 
