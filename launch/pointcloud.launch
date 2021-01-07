@@ -5,7 +5,7 @@
   <arg name="kinect_res" default="qhd"/>
 
   <!-- Launch the cameras -->
-  <include file="$(find contactdb_utils)/launch/contactdb_cameras.launch">
+  <include file="$(find contactpose_ros_utils)/launch/contactdb_cameras.launch">
     <arg name="view" value="false"/>
     <arg name="kinect_res" value="$(arg kinect_res)"/>
     <arg name="date" value="$(arg date)"/>
@@ -48,7 +48,7 @@
     </node>
 
     <group if="$(arg grab)">
-      <node name="pcd_grabber" pkg="contactdb_utils" type="pcd_grabber"
+      <node name="pcd_grabber" pkg="contactpose_ros_utils" type="pcd_grabber"
             args="$(env HOME) $(arg object)"
             output="screen" required="true">
         <!-- inputs -->
@@ -59,5 +59,5 @@
   </group>
 
   <node name="rviz" pkg="rviz" type="rviz" output="screen" required="true"
-        args="-d $(find contactdb_utils)/rviz_files/thermal_cloud.rviz"/>
+        args="-d $(find contactpose_utils)/rviz_files/thermal_cloud.rviz"/>
 </launch>
