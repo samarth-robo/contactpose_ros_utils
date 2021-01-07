@@ -9,7 +9,7 @@
   <arg name="thermal_const_norm" default="false"/>
 
   <!-- Start Kinect -->
-  <include file="$(find contactdb_utils)/launch/kinect.launch" ns="deepgrasp"
+  <include file="$(find contactpose_ros_utils)/launch/kinect.launch" ns="deepgrasp"
            if="$(eval arg('kinect_left') or arg('kinect_right') or arg('kinect_middle'))">
     <arg name="view" value="false"/>
     <arg name="view_images_only" value="$(arg view)"/>
@@ -21,7 +21,7 @@
   </include>
 
   <!-- Start thermal camera -->
-  <include file="$(find contactdb_utils)/launch/thermal.launch" ns="deepgrasp"
+  <include file="$(find contactpose_ros_utils)/launch/thermal.launch" ns="deepgrasp"
            if="$(arg thermal)">
     <arg name="view" value="$(arg view)"/>
     <arg name="const_norm" value="$(arg thermal_const_norm)"/>
