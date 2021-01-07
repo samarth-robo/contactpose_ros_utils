@@ -1,4 +1,4 @@
-# [ContactPose ROS]
+# ContactPose ROS
 
 ROS code used for recording the ContactPose dataset released in the following paper:
 
