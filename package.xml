@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>contactdb_utils</name>
+  <name>contactpose_ros_utils</name>
   <version>0.0.0</version>
-  <description>The deepgrasp_utils package</description>
+  <description>The contactpose_ros_utils package</description>
 
   <!-- One maintainer tag required, multiple allowed, one person per tag --> 
   <!-- Example:  -->
