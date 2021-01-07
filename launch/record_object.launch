@@ -6,7 +6,7 @@
     <arg name="date"/>
     <arg name="vis" default="false"/>
 
-    <include file="$(find contactdb_utils)/launch/contactdb_cameras.launch">
+    <include file="$(find contactpose_ros_utils)/launch/contactdb_cameras.launch">
         <arg name="kinect_res" value="$(arg kinect_res)"/>
         <arg name="thermal" value="true"/>
         <arg name="date" value="$(arg date)"/>
@@ -14,7 +14,7 @@
 
     <include file="$(find mocap_optitrack)/launch/mocap.launch">
         <arg name="mocap_config_file"
-             value="$(find contactdb_utils)/data/mocap.yaml"/>
+             value="$(find contactpose_ros_utils)/data/mocap.yaml"/>
     </include>
 
     <!-- Boson service listener -->
@@ -22,15 +22,15 @@
         <arg name="serial_port" value="$(arg boson_port)"/>
     </include>
 
-    <node name="turntable_operator" pkg="contactdb_utils" cwd="node"
+    <node name="turntable_operator" pkg="contactpose_ros_utils" cwd="node"
           type="operate_turntable.py" output="screen" required="true"
           args="
           --serial_port $(arg turntable_port)
-          --data_dir $(find contactdb_utils)/data/contactdb_data/rosbags/$(arg p_id)
+          --data_dir $(find contactpose_ros_utils)/data/contactpose_data/rosbags/$(arg p_id)
           --kinect_res $(arg kinect_res)"/>
 
     <node name="rviz" pkg="rviz" type="rviz" if="$(arg vis)"
-          args="-d $(find contactdb_utils)/rviz_files/recording.rviz"
+          args="-d $(find contactpose_ros_utils)/rviz_files/recording.rviz"
           output="screen"
           required="true"/>
 
