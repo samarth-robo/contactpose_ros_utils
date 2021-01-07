@@ -4,17 +4,17 @@
 
     <include file="$(find mocap_optitrack)/launch/mocap.launch">
         <arg name="mocap_config_file"
-             value="$(find contactdb_utils)/data/mocap.yaml"/>
+             value="$(find contactpose_ros_utils)/data/mocap.yaml"/>
     </include>
 
     <!-- All the static transforms -->
-    <node name="tf_pub" pkg="contactdb_utils" type="tf_publisher.py"
+    <node name="tf_pub" pkg="contactpose_ros_utils" type="tf_publisher.py"
           args="--date $(arg date)" output="screen" required="true"/>
-    <node name="object_tf_publisher" pkg="contactdb_utils" output="screen"
+    <node name="object_tf_publisher" pkg="contactpose_ros_utils" output="screen"
           type="optitrack_object_alignment_publisher.py"
           args="--object_name $(arg object_name)" required="true"
           if="$(eval arg('object_name') != 'none')"/>
 
     <node name="rviz" type="rviz" pkg="rviz" output="screen" required="true"
-          args="-d $(find contactdb_utils)/rviz_files/check_optitrack_streaming.rviz"/>
+          args="-d $(find contactpose_ros_utils)/rviz_files/check_optitrack_streaming.rviz"/>
 </launch>
