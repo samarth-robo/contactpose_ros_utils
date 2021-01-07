@@ -9,11 +9,11 @@
 
     <include file="$(find mocap_optitrack)/launch/mocap.launch">
         <arg name="mocap_config_file"
-             value="$(find contactdb_utils)/data/mocap.yaml"/>
+             value="$(find contactpose_ros_utils)/data/mocap.yaml"/>
     </include>
 
     <!-- Start Kinect -->
-    <include file="$(find contactdb_utils)/launch/kinect.launch" ns="deepgrasp"
+    <include file="$(find contactpose_ros_utils)/launch/kinect.launch" ns="deepgrasp"
              if="$(eval arg('kinect_left') or arg('kinect_right') or arg('kinect_middle'))">
         <arg name="view" value="false"/>
         <arg name="view_images_only" value="false"/>
@@ -25,10 +25,10 @@
     </include>
 
     <node name="marker_pub" required="true" output="screen"
-          pkg="contactdb_utils" type="check_kinect_calib.py"
+          pkg="contactpose_ros_utils" type="check_kinect_calib.py"
           args="--object_name $(arg object_name)"/>
 
-    <node name="object_tf_publisher" pkg="contactdb_utils" output="screen"
+    <node name="object_tf_publisher" pkg="contactpose_ros_utils" output="screen"
           type="optitrack_object_alignment_publisher.py"
           args="--object_name $(arg object_name)" required="true"
           if="$(eval arg('object_name') != 'none')"/>
