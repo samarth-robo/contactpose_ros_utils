@@ -10,7 +10,7 @@
   <arg name="view_images_only" default="true"/>
 
   <!-- All the static transforms -->
-  <node name="tf_pub" pkg="contactdb_utils" type="tf_publisher.py"
+  <node name="tf_pub" pkg="contactpose_ros_utils" type="tf_publisher.py"
         args="--date $(arg date)" output="screen" required="true"/>
 
   <!-- left -->
@@ -23,7 +23,7 @@
     <arg name="max_depth" value="$(arg max_depth)"/>
     <arg name="min_depth" value="$(arg min_depth)"/>
     <arg name="calib_path"
-         value="$(find contactdb_utils)/calibrations/intrinsics/kinects"/>
+         value="$(find contactpose_ros_utils)/calibrations/intrinsics/kinects"/>
     </include>
     <node name="left_view" type="image_view" pkg="image_view"
           if="$(arg view_images_only)">
@@ -41,7 +41,7 @@
       <arg name="max_depth" value="$(arg max_depth)"/>
       <arg name="min_depth" value="$(arg min_depth)"/>
       <arg name="calib_path"
-           value="$(find contactdb_utils)/calibrations/intrinsics/kinects"/>
+           value="$(find contactpose_ros_utils)/calibrations/intrinsics/kinects"/>
     </include>
     <node name="right_view" type="image_view" pkg="image_view"
           if="$(arg view_images_only)">
@@ -59,7 +59,7 @@
       <arg name="max_depth" value="$(arg max_depth)"/>
       <arg name="min_depth" value="$(arg min_depth)"/>
       <arg name="calib_path"
-           value="$(find contactdb_utils)/calibrations/intrinsics/kinects"/>
+           value="$(find contactpose_ros_utils)/calibrations/intrinsics/kinects"/>
     </include>
     <node name="middle_view" type="image_view" pkg="image_view"
           if="$(arg view_images_only)">
@@ -69,7 +69,7 @@
 
   <group if="$(arg view)">
     <node name="rviz" pkg="rviz" type="rviz" unless="$(arg view_images_only)"
-          args="-d $(find contactdb_utils)/rviz_files/kinects.rviz"
+          args="-d $(find contactpose_ros_utils)/rviz_files/kinects.rviz"
           output="screen" required="true"/>
   </group>
 </launch>
