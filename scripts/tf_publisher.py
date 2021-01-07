@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import sys
 import roslib
-package_name = 'contactdb_utils'
+package_name = 'contactpose_ros_utils'
 roslib.load_manifest(package_name)
 import rospy
 import tf2_ros
