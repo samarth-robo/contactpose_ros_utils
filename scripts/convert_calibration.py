@@ -204,7 +204,7 @@ def convert(input_dir, date, extrinsics_only=False):
   camera = json2camera(data[0])
   # write intrinsics
   if not extrinsics_only:
-    filename = 'package://contactdb_utils/calibrations/intrinsics/boson.yaml'
+    filename = 'package://contactpose_ros_utils/calibrations/intrinsics/boson.yaml'
     if camera.write_cinfo(filename, 'boson_frame', 'boson'):
       print("{:s} written".format(filename))
     else:
