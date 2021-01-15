@@ -31,6 +31,7 @@ Tested on Ubuntu 16.04 + ROS Kinetic. Features:
 - Records 3 Kinects + TF + Thermal camera simultaneously to bag files
 - Controls the Cowtech Ciclops turntable
 - Uses [low-latency FLRI Boson thermal camera drivers](https://github.com/samarth-robo/cv_camera)
+
 Raise a GitHub issue for questions, sorry the code is not well documented, but I am happy to assist with questions.
 
 ### Dependencies
