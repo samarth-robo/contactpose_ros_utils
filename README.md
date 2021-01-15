@@ -38,4 +38,4 @@ Raise a GitHub issue for questions, sorry the code is not well documented, but I
 See [`docs/deps.md`](docs/deps.md)
 
 ### Entry Points
-- `[launch/record_object.launch](launch/record_object.launch)`: High level launch file for recording a grasp. Starts 3 Kinects and the thermal camera, controls the turnrable, records data to bag file.
+- [`launch/record_object.launch`](launch/record_object.launch): High level launch file for recording a grasp. Starts 3 Kinects and the thermal camera, controls the turnrable, records data to bag file.
